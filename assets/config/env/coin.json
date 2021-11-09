@@ -1,0 +1,5 @@
+{
+    "ENV": "coin",
+    "HOST_NAME": "api.coingecko.com/api/v3/"
+  
+}
