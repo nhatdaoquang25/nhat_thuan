@@ -3,4 +3,15 @@ class StringConstants {
   static const String titleDetailScreen = 'DETAIL SCREEN';
   static const String titleSearchScreen = 'SEARCH SCREEN';
   static const String notFound = 'Not Found';
+
+  // ------Detail Screen --------------
+  static const String textHigh = 'High 24H';
+  static const String textLow = 'Low 24H';
+  static const String textAllTime = 'All Time High';
+  static const String textMarketCap = 'Market Cap';
+  static const String textTradingVolume = '24H Trading Volume';
+  static const String textCirculationSuplly = 'Circulation Suplly';
+  static const String textTotal = 'Total Supply';
+  static const String textMax = 'Max Supply';
+  static const String textDescription = 'Description';
 }
