@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/src/constants/constants.dart' as constants;
+import '/../src/constants/color_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-          gradient: constants.ColorConstant.backgroundGradient,
+          gradient: ColorConstants.backgroundGradient,
         ),
       ),
     );

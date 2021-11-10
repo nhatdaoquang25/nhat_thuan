@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'constants/constants.dart' as constants;
-import 'routes/route_genertor.dart';
+import '/../src/constants/name_routes_constants.dart';
+import '/../src/constants/string_constants.dart';
+import '/../src/routes/route_genertor.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -10,13 +11,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: constants.NameRoutesConstant.root,
+      initialRoute: NameRoutesConstants.root,
       onGenerateRoute: RouteGenerator.generateRoute,
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute<void>(
           settings: settings,
-          builder: (BuildContext context) =>
-              const Scaffold(body: Center(child: Text('Not Found'))),
+          builder: (BuildContext context) => const Scaffold(
+              body: Center(child: Text(StringConstants.notFound))),
         );
       },
     );
