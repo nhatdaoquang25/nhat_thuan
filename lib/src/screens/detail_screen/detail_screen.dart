@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nhat_thuan/src/constants/string_constants.dart';
-import 'package:nhat_thuan/src/constants/color_constants.dart';
+import '/../src/constants/string_constants.dart';
+import '/../src/constants/color_constants.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);

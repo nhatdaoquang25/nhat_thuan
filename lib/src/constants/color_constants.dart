@@ -11,6 +11,6 @@ class ColorConstants {
   static const Color colorTitleDetailScreen = Colors.white;
   static const Color colorIconCoinName = Colors.orange;
   static const Color colorCoinPricePlus = Colors.green;
-  static const Color colorHigh = Colors.red;
-  static const Color colorLow = Color(0xFF6078EA);
+  static const Color colorHigh = Colors.green;
+  static const Color colorLow = Colors.red;
 }
