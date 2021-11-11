@@ -13,4 +13,8 @@ class StringConstants {
   static const String textTotal = 'Total Supply';
   static const String textMax = 'Max Supply';
   static const String textDescription = 'Description';
+  static const String high = 'High';
+  static const String low = 'Low';
+  static const String hintSearch = 'Enter your name';
+
 }
