@@ -55,7 +55,10 @@ class HomeScreen extends StatelessWidget {
                             left: 10, right: 10, bottom: 5),
                         child: CustomCard(
                           index: index,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(NameRoutesConstants.detailScreen);
+                          },
                           name: "BTC",
                           imageNetwork:
                               "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
