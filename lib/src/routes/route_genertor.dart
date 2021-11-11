@@ -12,7 +12,7 @@ class RouteGenerator {
       case NameRoutesConstants.detailScreen:
         return MaterialPageRoute(builder: (_) => const DetailScreen());
       case NameRoutesConstants.searchScreen:
-        return MaterialPageRoute(builder: (_) => const SeachScreen());
+        return MaterialPageRoute(builder: (_) => const SearchScreen());
     }
   }
 }
