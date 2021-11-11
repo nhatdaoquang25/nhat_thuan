@@ -4,7 +4,6 @@ class StringConstants {
   static const String titleSearchScreen = 'SEARCH SCREEN';
   static const String notFound = 'Not Found';
 
-  // ------Detail Screen --------------
   static const String textHigh = 'High 24H';
   static const String textLow = 'Low 24H';
   static const String textAllTime = 'All Time High';
