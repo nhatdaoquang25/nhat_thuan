@@ -48,7 +48,7 @@ class CustomCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Image.asset(
+                    child: Image.network(
                       imageNetwork,
                       fit: BoxFit.contain,
                     ),

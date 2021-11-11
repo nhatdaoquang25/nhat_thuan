@@ -61,7 +61,8 @@ class SearchScreen extends StatelessWidget {
                     index: 0,
                     onTap: () {},
                     name: "BTC",
-                    imageNetwork: 'assets/images/bitcoin_symbol.png',
+                    imageNetwork:
+                        "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
                     currentPrice: 6500,
                     priceChange24h: 12.2,
                     priceChangePercentage24h: 0.4,
