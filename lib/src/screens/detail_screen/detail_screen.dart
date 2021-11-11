@@ -46,8 +46,7 @@ class DetailScreen extends StatelessWidget {
                           Row(
                             children: const [
                               Icon(CupertinoIcons.bitcoin_circle_fill,
-                                  size: 66.0,
-                                  color: ColorConstants.colorIconCoinName),
+                                  size: 66.0, color: Colors.orange),
                               Text(
                                 'BitCoin (BTC)',
                                 style: TextStyle(
@@ -65,13 +64,11 @@ class DetailScreen extends StatelessWidget {
                                   style: TextStyle(fontSize: 25.0),
                                 ),
                                 Icon(Icons.arrow_drop_up_outlined,
-                                    size: 25.0,
-                                    color: ColorConstants.colorCoinPricePlus),
+                                    size: 25.0, color: Colors.green),
                                 Text(
                                   '9.9%',
                                   style: TextStyle(
-                                      fontSize: 25.0,
-                                      color: ColorConstants.colorCoinPricePlus),
+                                      fontSize: 25.0, color: Colors.green),
                                 ),
                               ],
                             ),
@@ -81,8 +78,7 @@ class DetailScreen extends StatelessWidget {
                             child: Text(
                               '+123',
                               style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: ColorConstants.colorCoinPricePlus),
+                                  fontSize: 20.0, color: Colors.green),
                             ),
                           ),
                           Container(
@@ -98,12 +94,12 @@ class DetailScreen extends StatelessWidget {
                               Text(StringConstants.textHigh,
                                   style: TextStyle(
                                       fontSize: 16,
-                                      color: ColorConstants.colorHigh,
+                                      color: Colors.green,
                                       fontWeight: FontWeight.w700)),
                               Text('\$99.99',
                                   style: TextStyle(
                                       fontSize: 16,
-                                      color: ColorConstants.colorHigh,
+                                      color: Colors.green,
                                       fontWeight: FontWeight.w500)),
                             ],
                           ),
@@ -113,12 +109,12 @@ class DetailScreen extends StatelessWidget {
                               Text(StringConstants.textLow,
                                   style: TextStyle(
                                       fontSize: 16,
-                                      color: ColorConstants.colorLow,
+                                      color: Colors.red,
                                       fontWeight: FontWeight.w700)),
                               Text('\$99.99',
                                   style: TextStyle(
                                       fontSize: 16,
-                                      color: ColorConstants.colorLow,
+                                      color: Colors.red,
                                       fontWeight: FontWeight.w500)),
                             ],
                           ),
