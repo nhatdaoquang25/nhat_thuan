@@ -15,6 +15,7 @@ class StringConstants {
   static const String textDescription = 'Description';
   static const String high = 'High';
   static const String low = 'Low';
+
   static const String hintSearch = 'Enter your name';
 
 }
