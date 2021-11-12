@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
-part 'coin_event.dart';
-part 'coin_state.dart';
+import '/../src/blocs/coin_bloc/coin_event.dart';
+import '/../src/blocs/coin_bloc/coin_state.dart';
 
 class CoinBloc extends Bloc<CoinEvent, CoinState> {
   CoinBloc() : super(CoinInitial()) {
