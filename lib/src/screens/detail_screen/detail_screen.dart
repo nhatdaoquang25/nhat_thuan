@@ -9,6 +9,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -35,7 +36,7 @@ class DetailScreen extends StatelessWidget {
               children: [
                 Expanded(child: Container()),
                 Expanded(
-                  flex: 6,
+                  flex: 8,
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -142,19 +143,6 @@ class DetailScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
                               Text(StringConstants.textMarketCap,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500)),
-                              Text('\$99.99',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500)),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(StringConstants.textTradingVolume,
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500)),
