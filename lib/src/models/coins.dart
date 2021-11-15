@@ -3,11 +3,11 @@ class Coins {
   String symbol;
   String name;
   String? image;
-  int? currentPrice;
-  double? high24H;
-  double? low24H;
-  double? priceChange24H;
-  double? priceChangePercentage24H;
+  num? currentPrice;
+  num? high24H;
+  num? low24H;
+  num? priceChange24H;
+  num? priceChangePercentage24H;
 
   Coins({
     required this.id,
@@ -26,15 +26,10 @@ class Coins {
         symbol: json["symbol"],
         name: json["name"],
         image: json["image"],
-        currentPrice:
-            json["current_price"] == null ? 0 : json["current_price"].toInt(),
-        high24H: json["high_24h"] == null ? 0 : json["high_24h"].toDouble(),
-        low24H: json["low_24h"] == null ? 0 : json["low_24h"].toDouble(),
-        priceChange24H: json["price_change_24h"] == null
-            ? 0
-            : json["price_change_24h"].toDouble(),
-        priceChangePercentage24H: json["price_change_percentage_24h"] == null
-            ? 0
-            : json["price_change_percentage_24h"].toDouble(),
+        currentPrice: json["current_price"] ?? 0,
+        high24H: json["high_24h"] ?? 0,
+        low24H: json["low_24h"] ?? 0,
+        priceChange24H: json["price_change_24h"] ?? 0,
+        priceChangePercentage24H: json["price_change_percentage_24h"] ?? 0,
       );
 }
