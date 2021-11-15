@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                           imageNetwork:
                               "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
                           currentPrice: 6500.0,
-                          priceChange24h: 13,
+                          priceChange24h: 13.2,
                           priceChangePercentage24h: 0.4,
                         ));
                   },
