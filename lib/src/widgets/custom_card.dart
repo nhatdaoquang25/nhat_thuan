@@ -4,9 +4,9 @@ class CustomCard extends StatelessWidget {
   final int index;
   final VoidCallback onTap;
   final String name;
-  final int currentPrice;
-  final double priceChange24h;
-  final double priceChangePercentage24h;
+  final num currentPrice;
+  final num priceChange24h;
+  final num priceChangePercentage24h;
   final String imageNetwork;
 
   const CustomCard(
