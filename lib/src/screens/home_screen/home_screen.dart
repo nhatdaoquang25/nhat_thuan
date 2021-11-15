@@ -63,8 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           if (state is CoinLoadSucess) {
-            var coin = state.coins;
-
             return RefreshIndicator(
               onRefresh: () async {
                 BlocProvider.of<CoinBloc>(context).add(CoinRequested());
@@ -82,9 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         flex: 9,
                         child: ListView.builder(
                           padding: const EdgeInsets.only(top: 20),
-                          itemCount: coin!.length,
+                          itemCount: state.coins!.length,
                           itemBuilder: (context, index) {
-                            var coinIndex = coin[index];
+                            var coinIndex = state.coins![index];
                             return Padding(
                                 padding: const EdgeInsets.only(
                                     left: 10, right: 10, bottom: 5),

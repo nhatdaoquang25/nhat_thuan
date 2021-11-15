@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+
 import '/../src/config/app_config.dart';
 import '/../src/config/constants.dart';
 
@@ -13,11 +14,14 @@ class AppAlbumService extends CoinService {
   @override
   Future<List<Coins>> fecthCoins() async {
     Map<String, String> qParams = {
-      AppConfig.instance.getValue(AppConstants.currency): 'usd',
-      AppConfig.instance.getValue(AppConstants.order): 'market_cap_desc',
-      AppConfig.instance.getValue(AppConstants.perPage): '20',
-      AppConfig.instance.getValue(AppConstants.page): '1',
-      AppConfig.instance.getValue(AppConstants.sparkline): 'false',
+      AppConfig.instance.getValue(AppConstants.currency):
+          AppConstants.currencyOfMarket,
+      AppConfig.instance.getValue(AppConstants.order): AppConstants.orderBy,
+      AppConfig.instance.getValue(AppConstants.perPage):
+          AppConstants.amountPerPage,
+      AppConfig.instance.getValue(AppConstants.page): AppConstants.numberPage,
+      AppConfig.instance.getValue(AppConstants.sparkline):
+          AppConstants.valueSparkline,
     };
 
     final uri = Uri(
