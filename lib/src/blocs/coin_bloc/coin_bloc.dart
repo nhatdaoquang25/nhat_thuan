@@ -10,7 +10,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     on<CoinRequested>((event, emit) async {
       try {
         emit(CoinLoadInProgress());
-        emit(CoinLoadSucess(coins: await coinService!.fethCoins()));
+        emit(CoinLoadSucess(coins: await coinService!.fecthCoins()));
       } catch (e) {
         emit(CoinLoadFailure(errorMessage: e.toString()));
       }

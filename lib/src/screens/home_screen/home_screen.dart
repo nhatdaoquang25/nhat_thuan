@@ -91,8 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: CustomCard(
                                   index: index,
                                   onTap: () {
-                                    // ignore: avoid_print
-                                    print(coinIndex.id);
                                     Navigator.of(context).pushNamed(
                                         NameRoutesConstants.detailScreen);
                                   },

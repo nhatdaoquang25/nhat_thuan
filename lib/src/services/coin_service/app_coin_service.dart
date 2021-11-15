@@ -11,11 +11,11 @@ class AppAlbumService extends CoinService {
   AppAlbumService(http.Client client) : super(client);
 
   @override
-  Future<List<Coins>> fethCoins() async {
+  Future<List<Coins>> fecthCoins() async {
     Map<String, String> qParams = {
       AppConfig.instance.getValue(AppConstants.currency): 'usd',
       AppConfig.instance.getValue(AppConstants.order): 'market_cap_desc',
-      AppConfig.instance.getValue(AppConstants.perPage): '15',
+      AppConfig.instance.getValue(AppConstants.perPage): '20',
       AppConfig.instance.getValue(AppConstants.page): '1',
       AppConfig.instance.getValue(AppConstants.sparkline): 'false',
     };
