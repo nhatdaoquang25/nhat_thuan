@@ -2,12 +2,12 @@ class Coins {
   String id;
   String symbol;
   String name;
-  String? image;
-  num? currentPrice;
-  num? high24H;
-  num? low24H;
-  num? priceChange24H;
-  num? priceChangePercentage24H;
+  String image;
+  num currentPrice;
+  num high24H;
+  num low24H;
+  num priceChange24H;
+  num priceChangePercentage24H;
 
   Coins({
     required this.id,
