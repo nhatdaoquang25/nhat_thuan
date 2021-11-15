@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart' as intl;
+
+import '/../src/blocs/coin_bloc/coin_bloc.dart';
+import '/../src/blocs/coin_bloc/coin_event.dart';
+import '/../src/blocs/coin_bloc/coin_state.dart';
 
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/constants/string_constants.dart';
@@ -6,11 +12,18 @@ import '/../src/constants/string_constants.dart';
 import '/../src/widgets/custom_card.dart';
 import '/../src/constants/color_constants.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    final percentageFormat = intl.NumberFormat("##0.0#");
+    context.read<CoinBloc>().add(CoinRequested());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -35,42 +48,75 @@ class HomeScreen extends StatelessWidget {
               ))
         ],
       ),
-      body: Container(
-          decoration:
-              const BoxDecoration(gradient: ColorConstants.backgroundGradient),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(),
-              ),
-              Expanded(
-                flex: 9,
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 20),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 5),
-                        child: CustomCard(
-                          index: index,
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(NameRoutesConstants.detailScreen);
+      body: BlocBuilder<CoinBloc, CoinState>(
+        builder: (context, state) {
+          if (state is CoinLoadInProgress) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is CoinLoadFailure) {
+            return Container(
+              color: Colors.red,
+              alignment: Alignment.center,
+              child: Text(state.errorMessage!),
+            );
+          }
+          if (state is CoinLoadSucess) {
+            var coin = state.coins;
+
+            return RefreshIndicator(
+              onRefresh: () async {
+                BlocProvider.of<CoinBloc>(context).add(CoinRequested());
+              },
+              child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: ColorConstants.backgroundGradient),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(),
+                      ),
+                      Expanded(
+                        flex: 9,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.only(top: 20),
+                          itemCount: coin!.length,
+                          itemBuilder: (context, index) {
+                            var coinIndex = coin[index];
+                            return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 5),
+                                child: CustomCard(
+                                  index: index,
+                                  onTap: () {
+                                    // ignore: avoid_print
+                                    print(coinIndex.id);
+                                    Navigator.of(context).pushNamed(
+                                        NameRoutesConstants.detailScreen);
+                                  },
+                                  name: coinIndex.name,
+                                  imageNetwork: coinIndex.image,
+                                  currentPrice: coinIndex.currentPrice,
+                                  priceChange24h: num.parse(percentageFormat
+                                      .format(coinIndex.priceChange24H)),
+                                  priceChangePercentage24h: num.parse(
+                                      percentageFormat.format(
+                                          coinIndex.priceChangePercentage24H)),
+                                ));
                           },
-                          name: "BTC",
-                          imageNetwork:
-                              "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
-                          currentPrice: 6500.0,
-                          priceChange24h: 13.2,
-                          priceChangePercentage24h: 0.4,
-                        ));
-                  },
-                ),
-              )
-            ],
-          )),
+                        ),
+                      )
+                    ],
+                  )),
+            );
+          }
+          return Container(
+            color: Colors.green,
+          );
+        },
+      ),
     );
   }
 }

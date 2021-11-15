@@ -46,11 +46,14 @@ class CustomCard extends StatelessWidget {
               Expanded(
                   child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Image.network(
-                      imageNetwork,
-                      fit: BoxFit.contain,
+                  SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Image.network(
+                        imageNetwork,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -61,28 +64,44 @@ class CustomCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            name,
+                            name.toUpperCase(),
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Icons.arrow_drop_down_sharp,
-                                color: Colors.red,
-                              ),
-                              Text(
-                                '$priceChange24h ($priceChangePercentage24h%)',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          )
+                          priceChange24h > 0
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.arrow_drop_up_sharp,
+                                      color: Colors.green,
+                                    ),
+                                    Text(
+                                      '$priceChange24h ($priceChangePercentage24h%)',
+                                      style: const TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.arrow_drop_down_sharp,
+                                      color: Colors.red,
+                                    ),
+                                    Text(
+                                      '$priceChange24h ($priceChangePercentage24h%)',
+                                      style: const TextStyle(
+                                          fontSize: 16, color: Colors.red),
+                                    ),
+                                  ],
+                                )
                         ],
                       ),
                       const Spacer(),
                       Text(
-                        '\$ $currentPrice',
+                        '\$$currentPrice',
                         style: const TextStyle(fontSize: 20),
                       )
                     ],
