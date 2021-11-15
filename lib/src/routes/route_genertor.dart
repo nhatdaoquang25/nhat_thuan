@@ -8,6 +8,7 @@ import '/../src/screens/detail_screen/detail_screen.dart';
 import '/../src/screens/search_screen/search_screen.dart';
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/screens/home_screen/home_screen.dart';
+
 import 'package:http/http.dart' as http;
 
 class RouteGenerator {
