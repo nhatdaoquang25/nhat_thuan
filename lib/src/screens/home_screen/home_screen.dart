@@ -26,21 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   double paddingRightOfCustomCard = 10;
   double paddingBottomtOfCustomCard = 5;
 
-  late ScrollController controller;
-  int i = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = ScrollController()..addListener(_scrollListener);
-  }
-
-  @override
-  void dispose() {
-    controller.removeListener(_scrollListener);
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         flex: 9,
                         child: ListView.builder(
-                          controller: controller,
                           padding: EdgeInsets.only(top: paddingTopOfListView),
                           itemCount: state.coins!.length,
                           itemBuilder: (context, index) {
@@ -138,15 +122,5 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
-  }
-
-  void _scrollListener() {
-    // ignore: avoid_print
-    // print(controller.position.extentAfter);
-    if (controller.position.pixels == controller.position.maxScrollExtent) {
-      setState(() {
-        i++;
-      });
-    }
   }
 }
