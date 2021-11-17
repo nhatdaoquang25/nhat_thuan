@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class Coins extends Equatable {
+class Coins {
   final String id;
   final String symbol;
   final String name;
@@ -34,17 +32,4 @@ class Coins extends Equatable {
         priceChange24H: json["price_change_24h"] ?? 0,
         priceChangePercentage24H: json["price_change_percentage_24h"] ?? 0,
       );
-
-  @override
-  List<Object?> get props => [
-        id,
-        symbol,
-        name,
-        image,
-        currentPrice,
-        high24H,
-        low24H,
-        priceChange24H,
-        priceChangePercentage24H
-      ];
 }

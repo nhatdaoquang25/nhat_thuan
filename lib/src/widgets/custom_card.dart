@@ -65,10 +65,14 @@ class CustomCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            name.toUpperCase(),
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500),
+                          SizedBox(
+                            width: sizeWidth / 2.5,
+                            child: Text(
+                              name.toUpperCase(),
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 19, fontWeight: FontWeight.w600),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,

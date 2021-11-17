@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '/../src/widgets/custom_card.dart';
-
 import '/../src/constants/color_constants.dart';
 import '/../src/constants/string_constants.dart';
+import '/../src/widgets/custom_card.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);

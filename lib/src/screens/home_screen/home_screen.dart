@@ -6,11 +6,10 @@ import '/../src/blocs/coin_bloc/coin_bloc.dart';
 import '/../src/blocs/coin_bloc/coin_event.dart';
 import '/../src/blocs/coin_bloc/coin_state.dart';
 
+import '/../src/constants/color_constants.dart';
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/constants/string_constants.dart';
-
 import '/../src/widgets/custom_card.dart';
-import '/../src/constants/color_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,16 +19,30 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final percentageFormat = intl.NumberFormat("##0.0#");
+
+  double paddingTopOfListView = 20;
+  double paddingLeftOfCustomCard = 10;
+  double paddingRightOfCustomCard = 10;
+  double paddingBottomtOfCustomCard = 5;
+
+  late ScrollController controller;
+  int i = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController()..addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_scrollListener);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final percentageFormat = intl.NumberFormat("##0.0#");
-
-    double paddingTopOfListView = 20;
-
-    double paddingLeftOfCustomCard = 10;
-    double paddingRightOfCustomCard = 10;
-    double paddingBottomtOfCustomCard = 5;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -85,6 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         flex: 9,
                         child: ListView.builder(
+                          controller: controller,
                           padding: EdgeInsets.only(top: paddingTopOfListView),
                           itemCount: state.coins!.length,
                           itemBuilder: (context, index) {
@@ -103,11 +117,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   name: coinIndex.name,
                                   imageNetwork: coinIndex.image,
                                   currentPrice: coinIndex.currentPrice,
-                                  priceChange24h: num.parse(percentageFormat
-                                      .format(coinIndex.priceChange24H)),
-                                  priceChangePercentage24h: num.parse(
-                                      percentageFormat.format(
-                                          coinIndex.priceChangePercentage24H)),
+                                  priceChange24h: num.tryParse(percentageFormat
+                                          .format(coinIndex.priceChange24H)) ??
+                                      0,
+                                  priceChangePercentage24h: num.tryParse(
+                                          percentageFormat.format(coinIndex
+                                              .priceChangePercentage24H)) ??
+                                      0,
                                 ));
                           },
                         ),
@@ -122,5 +138,15 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+
+  void _scrollListener() {
+    // ignore: avoid_print
+    // print(controller.position.extentAfter);
+    if (controller.position.pixels == controller.position.maxScrollExtent) {
+      setState(() {
+        i++;
+      });
+    }
   }
 }
