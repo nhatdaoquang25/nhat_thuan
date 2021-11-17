@@ -70,35 +70,28 @@ class CustomCard extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),
                           ),
-                          priceChange24h > 0
-                              ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              priceChange24h > 0
+                                  ? const Icon(
                                       Icons.arrow_drop_up_sharp,
                                       color: Colors.green,
-                                    ),
-                                    Text(
-                                      '$priceChange24h ($priceChangePercentage24h%)',
-                                      style: const TextStyle(
-                                          fontSize: 16, color: Colors.green),
-                                    ),
-                                  ],
-                                )
-                              : Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(
+                                    )
+                                  : const Icon(
                                       Icons.arrow_drop_down_sharp,
                                       color: Colors.red,
                                     ),
-                                    Text(
-                                      '$priceChange24h ($priceChangePercentage24h%)',
-                                      style: const TextStyle(
-                                          fontSize: 16, color: Colors.red),
-                                    ),
-                                  ],
-                                )
+                              Text(
+                                '$priceChange24h ($priceChangePercentage24h%)',
+                                style: priceChange24h > 0
+                                    ? const TextStyle(
+                                        fontSize: 16, color: Colors.green)
+                                    : const TextStyle(
+                                        fontSize: 16, color: Colors.red),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                       const Spacer(),

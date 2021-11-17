@@ -23,7 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final percentageFormat = intl.NumberFormat("##0.0#");
-    context.read<CoinBloc>().add(CoinRequested());
+
+    double paddingTopOfListView = 20;
+
+    double paddingLeftOfCustomCard = 10;
+    double paddingRightOfCustomCard = 10;
+    double paddingBottomtOfCustomCard = 5;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -79,13 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         flex: 9,
                         child: ListView.builder(
-                          padding: const EdgeInsets.only(top: 20),
+                          padding: EdgeInsets.only(top: paddingTopOfListView),
                           itemCount: state.coins!.length,
                           itemBuilder: (context, index) {
                             var coinIndex = state.coins![index];
                             return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, right: 10, bottom: 5),
+                                padding: EdgeInsets.only(
+                                    left: paddingLeftOfCustomCard,
+                                    right: paddingRightOfCustomCard,
+                                    bottom: paddingBottomtOfCustomCard),
                                 child: CustomCard(
                                   index: index,
                                   onTap: () {

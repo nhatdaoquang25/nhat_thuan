@@ -13,7 +13,7 @@ class AppAlbumService extends CoinService {
 
   @override
   Future<List<Coins>> fecthCoins() async {
-    Map<String, String> qParams = {
+    Map<String, String> queryParameters = {
       AppConfig.instance.getValue(AppConstants.currency):
           AppConstants.currencyOfMarket,
       AppConfig.instance.getValue(AppConstants.order): AppConstants.orderBy,
@@ -29,19 +29,22 @@ class AppAlbumService extends CoinService {
         host: AppConfig.instance.getValue(AppConstants.hostName),
         path: AppConfig.instance.getValue(AppConstants.coinPath) +
             AppConfig.instance.getValue(AppConstants.marketPath),
-        queryParameters: qParams);
+        queryParameters: queryParameters);
 
     var response = await client.get(uri);
 
-    if (response.statusCode == 200) {
-      Iterable responseList = json.decode(response.body);
+    try {
+      if (response.statusCode == 200) {
+        Iterable responseList = json.decode(response.body);
 
-      var coins =
-          List<Coins>.from(responseList.map((model) => Coins.fromJson(model)));
-
-      return coins;
-    } else {
-      throw Exception('Failed to load coin list');
+        var coins = List<Coins>.from(
+            responseList.map((model) => Coins.fromJson(model)));
+        return coins;
+      } else {
+        throw Exception('Failed to load coin list');
+      }
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }

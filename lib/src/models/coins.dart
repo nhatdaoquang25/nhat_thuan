@@ -1,15 +1,17 @@
-class Coins {
-  String id;
-  String symbol;
-  String name;
-  String image;
-  num currentPrice;
-  num high24H;
-  num low24H;
-  num priceChange24H;
-  num priceChangePercentage24H;
+import 'package:equatable/equatable.dart';
 
-  Coins({
+class Coins extends Equatable {
+  final String id;
+  final String symbol;
+  final String name;
+  final String image;
+  final num currentPrice;
+  final num high24H;
+  final num low24H;
+  final num priceChange24H;
+  final num priceChangePercentage24H;
+
+  const Coins({
     required this.id,
     required this.symbol,
     required this.name,
@@ -32,4 +34,17 @@ class Coins {
         priceChange24H: json["price_change_24h"] ?? 0,
         priceChangePercentage24H: json["price_change_percentage_24h"] ?? 0,
       );
+
+  @override
+  List<Object?> get props => [
+        id,
+        symbol,
+        name,
+        image,
+        currentPrice,
+        high24H,
+        low24H,
+        priceChange24H,
+        priceChangePercentage24H
+      ];
 }

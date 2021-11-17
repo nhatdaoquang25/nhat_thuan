@@ -6,5 +6,6 @@ abstract class CoinService {
   final http.Client client;
 
   CoinService(this.client);
-  Future<List<Coins>> fecthCoins();
+
+  Future<List<Coins>>? fecthCoins();
 }
