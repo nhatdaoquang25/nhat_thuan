@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:nhat_thuan/src/blocs/coin_bloc/coin_bloc.dart';
 import 'package:nhat_thuan/src/blocs/coin_bloc/coin_event.dart';
 import 'package:nhat_thuan/src/blocs/coin_bloc/coin_state.dart';
 import 'package:nhat_thuan/src/services/coin_service/coin_service.dart';
+import 'package:mockito/mockito.dart';
 
 class MockCoinService extends Mock implements CoinService {}
 
@@ -31,7 +31,7 @@ void main() {
       coinService = MockCoinService();
       return CoinBloc(coinService: coinService);
     },
-    act: (CoinBloc bloc) => bloc.add(CoinRequested()),
+    act: (CoinBloc bloc) => bloc.add(CoinRequested(numberPage: 1)),
     expect: () => [CoinLoadInProgress(), CoinLoadSucess()],
   );
 
@@ -39,10 +39,10 @@ void main() {
     'emits [CoinLoadFailure] when [CoinRequested] is called and service throws error.',
     build: () {
       coinService = MockCoinService();
-      when(coinService.fecthCoins).thenThrow(Exception());
+      when(coinService.fecthCoins(1)).thenThrow(Exception());
       return CoinBloc(coinService: coinService);
     },
-    act: (CoinBloc bloc) => bloc.add(CoinRequested()),
+    act: (CoinBloc bloc) => bloc.add(CoinRequested(numberPage: 1)),
     expect: () => [
       CoinLoadInProgress(),
       CoinLoadFailure(errorMessage: Exception().toString()),

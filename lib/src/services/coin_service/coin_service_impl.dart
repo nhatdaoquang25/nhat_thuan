@@ -12,13 +12,13 @@ class CoinServiceImpl extends CoinService {
   CoinServiceImpl(http.Client client) : super(client);
 
   @override
-  Future<List<Coins>> fecthCoins() async {
+  Future<List<Coins>> fecthCoins(int numberPage) async {
     Map<String, String> queryParameters = {
       AppConfig.instance.getValue(AppConstants.currency):
           AppConstants.currencyOfMarket,
       AppConfig.instance.getValue(AppConstants.perPage):
           AppConstants.amountPerPage,
-      AppConfig.instance.getValue(AppConstants.page): AppConstants.numberPage,
+      AppConfig.instance.getValue(AppConstants.page): '$numberPage',
     };
 
     final uri = Uri(

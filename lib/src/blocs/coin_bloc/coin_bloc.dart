@@ -12,7 +12,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
       try {
         emit(CoinLoadInProgress());
 
-        var coins = await coinService!.fecthCoins();
+        var coins = await coinService!.fecthCoins(event.numberPage);
         emit(CoinLoadSucess(coins: coins));
       } catch (e) {
         emit(CoinLoadFailure(errorMessage: e.toString()));

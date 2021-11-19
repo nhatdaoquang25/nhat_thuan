@@ -7,8 +7,6 @@ import '/../src/constants/name_routes_constants.dart';
 import '/../src/routes/route_genertor.dart';
 import 'package:http/http.dart' as http;
 
-import 'blocs/coin_bloc/coin_event.dart';
-
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -18,10 +16,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                CoinBloc(coinService: CoinServiceImpl(httpClient))
-                  ..add(CoinRequested()),
-          ),
+              create: (context) =>
+                  CoinBloc(coinService: CoinServiceImpl(httpClient))),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -7,5 +7,5 @@ abstract class CoinService {
 
   CoinService(this.client);
 
-  Future<List<Coins>>? fecthCoins();
+  Future<List<Coins>>? fecthCoins(int numberPage);
 }

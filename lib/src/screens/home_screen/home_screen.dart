@@ -10,6 +10,7 @@ import '/../src/constants/color_constants.dart';
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/constants/string_constants.dart';
 import '/../src/widgets/custom_card.dart';
+import '../../constants/value_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,6 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
   double paddingLeftOfCustomCard = 10;
   double paddingRightOfCustomCard = 10;
   double paddingBottomtOfCustomCard = 5;
+  ScrollController controller = ScrollController();
+  int index = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController()..addListener(_scrollListener);
+    BlocProvider.of<CoinBloc>(context)
+        .add(CoinRequested(numberPage: ValueConstants.defaultValue));
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_scrollListener);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is CoinLoadSucess) {
             return RefreshIndicator(
               onRefresh: () async {
-                BlocProvider.of<CoinBloc>(context).add(CoinRequested());
+                BlocProvider.of<CoinBloc>(context).add(
+                    CoinRequested(numberPage: ValueConstants.defaultValue));
+                setState(() {
+                  index = 1;
+                });
               },
               child: Container(
                   decoration: const BoxDecoration(
@@ -83,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         flex: 9,
                         child: ListView.builder(
+                          controller: controller,
                           padding: EdgeInsets.only(top: paddingTopOfListView),
                           itemCount: state.coins!.length,
                           itemBuilder: (context, index) {
@@ -122,5 +144,14 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+
+  void _scrollListener() {
+    if (controller.position.pixels == controller.position.maxScrollExtent) {
+      setState(() {
+        BlocProvider.of<CoinBloc>(context)
+            .add(CoinRequested(numberPage: ++index));
+      });
+    }
   }
 }

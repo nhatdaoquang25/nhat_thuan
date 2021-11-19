@@ -31,7 +31,7 @@ class FakeCoinsEvent extends Fake implements CoinEvent {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
-class MyTypeFake extends Fake implements Route {}
+class FakeRoute extends Fake implements Route {}
 
 void main() {
   final mockResponse = json.decode(mockCoinsData);
@@ -40,7 +40,7 @@ void main() {
   setUpAll(() {
     registerFallbackValue(FakeCoinsState());
     registerFallbackValue(FakeCoinsEvent());
-    registerFallbackValue(MyTypeFake());
+    registerFallbackValue(FakeRoute());
   });
 
   group('Home Screen Test', () {
@@ -64,7 +64,7 @@ void main() {
     });
 
     testWidgets('Should render Appbar with correct title', (tester) async {
-      when(() => coinService.fecthCoins())
+      when(() => coinService.fecthCoins(1))
           .thenAnswer((_) async => mockResponse);
       when(() => coinBloc.state).thenReturn(CoinLoadInProgress());
 
