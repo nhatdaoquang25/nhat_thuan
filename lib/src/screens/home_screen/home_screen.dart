@@ -28,11 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   double paddingBottomtOfCustomCard = 5;
   ScrollController controller = ScrollController();
   int index = 1;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     controller = ScrollController()..addListener(_scrollListener);
+
     BlocProvider.of<CoinBloc>(context)
         .add(CoinRequested(numberPage: ValueConstants.defaultValue));
   }
@@ -142,6 +144,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                               ),
                             ),
+                            isLoading
+                                ? const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Container()
                           ],
                         ),
                       )
@@ -158,8 +165,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _scrollListener() {
-    if (controller.position.pixels == controller.position.maxScrollExtent) {
+    setState(() {
+      isLoading = false;
+    });
+    final maxScroll = controller.position.maxScrollExtent;
+    final currentScroll = controller.offset;
+    if (currentScroll >= (maxScroll * 0.9)) {
       setState(() {
+        isLoading = true;
         BlocProvider.of<CoinBloc>(context)
             .add(CoinLoadMore(numberPage: ++index));
       });
