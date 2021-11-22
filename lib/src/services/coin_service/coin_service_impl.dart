@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:nhat_thuan/src/constants/string_constants.dart';
 
 import '/../src/config/app_config.dart';
 import '/../src/config/constants.dart';
@@ -38,7 +39,35 @@ class CoinServiceImpl extends CoinService {
 
       return coins;
     } else {
-      throw Exception('Failed to load coin list');
+      throw Exception(StringConstants.failException);
+    }
+  }
+
+  @override
+  Future<List<Coins>> fecthCoinsAll() async {
+    Map<String, String> queryParameters = {
+      AppConfig.instance.getValue(AppConstants.currency):
+          AppConstants.currencyOfMarket,
+    };
+
+    final uri = Uri(
+        scheme: 'https',
+        host: AppConfig.instance.getValue(AppConstants.hostName),
+        path: AppConfig.instance.getValue(AppConstants.coinPath) +
+            AppConfig.instance.getValue(AppConstants.marketPath),
+        queryParameters: queryParameters);
+
+    var response = await client.get(uri);
+
+    if (response.statusCode == 200) {
+      Iterable responseList = json.decode(response.body);
+
+      var coins =
+          List<Coins>.from(responseList.map((model) => Coins.fromJson(model)));
+
+      return coins;
+    } else {
+      throw Exception(StringConstants.failException);
     }
   }
 }

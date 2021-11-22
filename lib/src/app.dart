@@ -7,6 +7,8 @@ import '/../src/constants/name_routes_constants.dart';
 import '/../src/routes/route_genertor.dart';
 import 'package:http/http.dart' as http;
 
+import 'blocs/search_bloc/search_bloc.dart';
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -18,6 +20,9 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   CoinBloc(coinService: CoinServiceImpl(httpClient))),
+          BlocProvider(
+              create: (context) =>
+                  SearchBloc(coinService: CoinServiceImpl(httpClient))),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
