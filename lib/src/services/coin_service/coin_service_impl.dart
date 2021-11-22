@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:nhat_thuan/src/constants/string_constants.dart';
+import '../../constants/string_constants.dart';
 
 import '/../src/config/app_config.dart';
 import '/../src/config/constants.dart';

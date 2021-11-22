@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nhat_thuan/src/models/coins.dart';
+import '../../models/coins.dart';
 
 import '/../src/blocs/coin_bloc/coin_event.dart';
 import '/../src/blocs/coin_bloc/coin_state.dart';
