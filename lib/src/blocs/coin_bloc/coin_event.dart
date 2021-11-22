@@ -10,3 +10,9 @@ class CoinRequested extends CoinEvent {
 
   CoinRequested({required this.numberPage});
 }
+
+class CoinLoadMore extends CoinEvent {
+  final int numberPage;
+
+  CoinLoadMore({required this.numberPage});
+}

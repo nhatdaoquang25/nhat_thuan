@@ -48,4 +48,27 @@ void main() {
       CoinLoadFailure(errorMessage: Exception().toString()),
     ],
   );
+
+  blocTest(
+    'emits [CoinLoadInProgress] then [CoinLoadSucess] when [CoinRequested] is called',
+    build: () {
+      coinService = MockCoinService();
+      return CoinBloc(coinService: coinService);
+    },
+    act: (CoinBloc bloc) => bloc.add(CoinLoadMore(numberPage: 1)),
+    expect: () => [CoinLoadSucess()],
+  );
+
+  blocTest(
+    'emits [CoinLoadFailure] when [CoinRequested] is called and service throws error.',
+    build: () {
+      coinService = MockCoinService();
+      when(coinService.fecthCoins(1)).thenThrow(Exception());
+      return CoinBloc(coinService: coinService);
+    },
+    act: (CoinBloc bloc) => bloc.add(CoinLoadMore(numberPage: 1)),
+    expect: () => [
+      CoinLoadFailure(errorMessage: Exception().toString()),
+    ],
+  );
 }

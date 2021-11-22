@@ -103,35 +103,46 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Expanded(
                         flex: 9,
-                        child: ListView.builder(
-                          controller: controller,
-                          padding: EdgeInsets.only(top: paddingTopOfListView),
-                          itemCount: state.coins!.length,
-                          itemBuilder: (context, index) {
-                            var coinIndex = state.coins![index];
-                            return Padding(
-                                padding: EdgeInsets.only(
-                                    left: paddingLeftOfCustomCard,
-                                    right: paddingRightOfCustomCard,
-                                    bottom: paddingBottomtOfCustomCard),
-                                child: CustomCard(
-                                  index: index,
-                                  onTap: () {
-                                    Navigator.of(context).pushNamed(
-                                        NameRoutesConstants.detailScreen);
-                                  },
-                                  name: coinIndex.name,
-                                  imageNetwork: coinIndex.image,
-                                  currentPrice: coinIndex.currentPrice,
-                                  priceChange24h: num.tryParse(percentageFormat
-                                          .format(coinIndex.priceChange24H)) ??
-                                      0,
-                                  priceChangePercentage24h: num.tryParse(
-                                          percentageFormat.format(coinIndex
-                                              .priceChangePercentage24H)) ??
-                                      0,
-                                ));
-                          },
+                        child: Column(
+                          children: [
+                            Flexible(
+                              flex: 6,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                controller: controller,
+                                padding:
+                                    EdgeInsets.only(top: paddingTopOfListView),
+                                itemCount: state.coins!.length,
+                                itemBuilder: (context, index) {
+                                  var coinIndex = state.coins![index];
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        left: paddingLeftOfCustomCard,
+                                        right: paddingRightOfCustomCard,
+                                        bottom: paddingBottomtOfCustomCard),
+                                    child: CustomCard(
+                                      index: index,
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                            NameRoutesConstants.detailScreen);
+                                      },
+                                      name: coinIndex.name,
+                                      imageNetwork: coinIndex.image,
+                                      currentPrice: coinIndex.currentPrice,
+                                      priceChange24h: num.tryParse(
+                                              percentageFormat.format(
+                                                  coinIndex.priceChange24H)) ??
+                                          0,
+                                      priceChangePercentage24h: num.tryParse(
+                                              percentageFormat.format(coinIndex
+                                                  .priceChangePercentage24H)) ??
+                                          0,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ],
@@ -150,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (controller.position.pixels == controller.position.maxScrollExtent) {
       setState(() {
         BlocProvider.of<CoinBloc>(context)
-            .add(CoinRequested(numberPage: ++index));
+            .add(CoinLoadMore(numberPage: ++index));
       });
     }
   }
