@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:intl/intl.dart' as intl;
 
+import '/../src/blocs/detail_screen_bloc/detail_event.dart';
 import '/../src/blocs/detail_screen_bloc/detail_bloc.dart';
 import '/../src/blocs/detail_screen_bloc/detail_state.dart';
 
@@ -17,6 +18,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<DetailBloc>().add(DetailRequested());
     final percentageFormat = intl.NumberFormat("##0.0");
     return MaterialApp(
       debugShowCheckedModeBanner: false,

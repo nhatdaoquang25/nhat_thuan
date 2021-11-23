@@ -23,8 +23,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) =>
-                DetailBloc(service: AppDetailService(httpClient))
-                  ..add(DetailRequested())),
+                DetailBloc(service: AppDetailService(httpClient))),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

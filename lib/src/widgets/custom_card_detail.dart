@@ -83,7 +83,6 @@ class CustomCardDetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 top: screenPadding,
-                // left: screenPadding + 30.0,
               ),
               child: Row(
                 children: [
@@ -234,12 +233,14 @@ class CustomLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double linePadding = 10.0;
+    double lineHeight = 5.0;
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      margin: EdgeInsets.symmetric(vertical: linePadding),
       decoration:
           const BoxDecoration(gradient: ColorConstants.backgroundGradient),
       width: double.infinity,
-      height: 5.0,
+      height: lineHeight,
     );
   }
 }
