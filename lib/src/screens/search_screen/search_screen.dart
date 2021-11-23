@@ -12,9 +12,7 @@ import '/../src/constants/color_constants.dart';
 import '/../src/constants/string_constants.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({
-    Key? key,
-  }) : super(key: key);
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +59,8 @@ class SearchScreen extends StatelessWidget {
                           coinslist: state.listCoins!,
                         );
                       }
-                      return const CustomSearchBar(
-                        coinslist: [],
+                      return Container(
+                        color: Colors.green,
                       );
                     },
                   )),

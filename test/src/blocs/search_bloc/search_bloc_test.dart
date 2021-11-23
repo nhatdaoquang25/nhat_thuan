@@ -42,7 +42,7 @@ void main() {
     expect: () => [const SearchLoadSuccess()],
   );
   blocTest(
-    'emits [SeachLoadFailure] when [CoinRequested] is called and service throws error.',
+    'emits [SeachLoadFailure] when [SearchRequested] is called and service throws error.',
     build: () {
       coinService = MockCoinService();
       when(coinService.fecthCoinsAll()).thenThrow(Exception());

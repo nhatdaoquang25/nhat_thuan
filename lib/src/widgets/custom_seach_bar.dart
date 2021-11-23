@@ -10,7 +10,7 @@ class CustomSearchBar extends StatelessWidget {
 
   const CustomSearchBar({Key? key, required this.coinslist}) : super(key: key);
 
-  static String _displayStringForOption(Coins option) => option.name;
+  static String displayStringForOption(Coins option) => option.name;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomSearchBar extends StatelessWidget {
     double paddingRight = 25;
 
     return Autocomplete<Coins>(
-      displayStringForOption: _displayStringForOption,
+      displayStringForOption: displayStringForOption,
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
         return TextField(

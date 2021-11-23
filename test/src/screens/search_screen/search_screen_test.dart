@@ -9,11 +9,14 @@ import 'package:nhat_thuan/src/blocs/search_bloc/search_bloc.dart';
 import 'package:nhat_thuan/src/blocs/search_bloc/search_event.dart';
 import 'package:nhat_thuan/src/blocs/search_bloc/search_state.dart';
 import 'package:nhat_thuan/src/constants/name_routes_constants.dart';
+import 'package:nhat_thuan/src/models/coins.dart';
 import 'package:nhat_thuan/src/routes/route_genertor.dart';
 import 'package:nhat_thuan/src/screens/search_screen/search_screen.dart';
 import 'package:nhat_thuan/src/services/coin_service/coin_service.dart';
+import 'package:nhat_thuan/src/widgets/custom_seach_bar.dart';
 
 import '../../mock/coins_mock_data.dart';
+import '../../mock/mock_network.dart';
 
 class MockSearchBloc extends MockBloc<SearchEvent, SearchState>
     implements SearchBloc {}
@@ -68,7 +71,7 @@ void main() {
       expect(titleFinder, findsOneWidget);
     });
     testWidgets(
-        'Should render red container with error message when coin bloc state is [CoinLoadFailure]',
+        'Should render error message when coin bloc state is [SeachLoadFailure]',
         (tester) async {
       String errorMessage = 'errorMessage';
       when(() => searchBloc.state)
@@ -79,6 +82,32 @@ void main() {
 
       final errorMessageFinder = find.text(errorMessage);
       expect(errorMessageFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Should render Custom Search Bar list when bloc state is [SearchLoadSuccess]',
+        (tester) async {
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
+          listCoins: List<Coins>.from(
+              mockResponse.map((model) => Coins.fromJson(model)))));
+      await mockNetwork(() async {
+        await tester.pumpWidget(widget);
+
+        await tester.pumpAndSettle();
+
+        expect(find.byType(CustomSearchBar), findsOneWidget);
+      });
+    });
+
+    testWidgets(
+        'Should render Containers list when state is [SearchLoadInProgress]',
+        (WidgetTester tester) async {
+      when(() => searchBloc.state).thenReturn(SearchLoadInProgress());
+      await mockNetwork(() async {
+        await tester.pumpWidget(widget);
+        expect((tester.widget(find.byType(Container).last) as Container).color,
+            Colors.green);
+      });
     });
   });
 }
