@@ -9,10 +9,14 @@ class CoinRequested extends CoinEvent {
   final int numberPage;
 
   CoinRequested({required this.numberPage});
+  @override
+  List<Object?> get props => [numberPage];
 }
 
 class CoinLoadMore extends CoinEvent {
   final int numberPage;
 
   CoinLoadMore({required this.numberPage});
+  @override
+  List<Object?> get props => [numberPage];
 }

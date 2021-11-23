@@ -22,10 +22,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final percentageFormat = intl.NumberFormat("##0.0#");
 
-  double paddingTopOfListView = 20;
-  double paddingLeftOfCustomCard = 10;
-  double paddingRightOfCustomCard = 10;
-  double paddingBottomtOfCustomCard = 5;
+  final double _paddingTopOfListView = 20;
+  final double _paddingLeftOfCustomCard = 10;
+  final double _paddingRightOfCustomCard = 10;
+  final double _paddingBottomtOfCustomCard = 5;
   ScrollController controller = ScrollController();
   int index = 1;
   bool isLoading = false;
@@ -113,15 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 shrinkWrap: true,
                                 controller: controller,
                                 padding:
-                                    EdgeInsets.only(top: paddingTopOfListView),
+                                    EdgeInsets.only(top: _paddingTopOfListView),
                                 itemCount: state.coins!.length,
                                 itemBuilder: (context, index) {
                                   var coinIndex = state.coins![index];
                                   return Padding(
                                     padding: EdgeInsets.only(
-                                        left: paddingLeftOfCustomCard,
-                                        right: paddingRightOfCustomCard,
-                                        bottom: paddingBottomtOfCustomCard),
+                                        left: _paddingLeftOfCustomCard,
+                                        right: _paddingRightOfCustomCard,
+                                        bottom: _paddingBottomtOfCustomCard),
                                     child: CustomCard(
                                       index: index,
                                       onTap: () {
@@ -170,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     final maxScroll = controller.position.maxScrollExtent;
     final currentScroll = controller.offset;
-    if (currentScroll >= (maxScroll * 0.9)) {
+    if (currentScroll == maxScroll) {
       setState(() {
         isLoading = true;
         BlocProvider.of<CoinBloc>(context)

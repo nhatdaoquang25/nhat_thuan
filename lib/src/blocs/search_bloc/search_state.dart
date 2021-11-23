@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import '../../models/coins.dart';
 
 abstract class SearchState extends Equatable {

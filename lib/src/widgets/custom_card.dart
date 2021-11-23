@@ -24,8 +24,9 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double sizeWidth = MediaQuery.of(context).size.width;
     double sizeHeight = MediaQuery.of(context).size.height;
-    double widthSizedBox = 50;
-    double heightSizedBox = 50;
+    const double _widthSizedBox = 50;
+    const double _heightSizedBox = 50;
+    const double _paddingImage = 10.0;
 
     return Card(
       elevation: 2,
@@ -49,10 +50,10 @@ class CustomCard extends StatelessWidget {
                   child: Row(
                 children: [
                   SizedBox(
-                    width: widthSizedBox,
-                    height: heightSizedBox,
+                    width: _widthSizedBox,
+                    height: _heightSizedBox,
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(_paddingImage),
                       child: Image.network(
                         imageNetwork,
                       ),
