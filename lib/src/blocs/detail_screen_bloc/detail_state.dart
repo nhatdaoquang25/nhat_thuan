@@ -1,6 +1,8 @@
-import '/../src/models/detail_model.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class DetailState {
+import '/../src/models/coins_detail.dart';
+
+abstract class DetailState extends Equatable {
   List<Object?> get props => [];
 }
 

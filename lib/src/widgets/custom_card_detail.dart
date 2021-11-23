@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import '/../src/constants/color_constants.dart';
 import '/../src/constants/string_constants.dart';
 
@@ -19,21 +20,21 @@ class CustomCardDetail extends StatelessWidget {
   final num totalSupply;
   final num maxSupply;
 
-  const CustomCardDetail(
-    this.id,
-    this.symbol,
-    this.name,
-    this.image,
-    this.description,
-    this.currentPrice,
-    this.priceChangePercentage24H,
-    this.high24H,
-    this.low24H,
-    this.marketCap,
-    this.circulatingSupply,
-    this.totalSupply,
-    this.maxSupply, {
+  const CustomCardDetail({
     Key? key,
+    required this.id,
+    required this.symbol,
+    required this.name,
+    required this.image,
+    required this.description,
+    required this.currentPrice,
+    required this.priceChangePercentage24H,
+    required this.high24H,
+    required this.low24H,
+    required this.marketCap,
+    required this.circulatingSupply,
+    required this.totalSupply,
+    required this.maxSupply,
   }) : super(key: key);
 
   @override

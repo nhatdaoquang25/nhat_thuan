@@ -1,10 +1,11 @@
 import 'package:http/http.dart' as http;
-import '/../src/models/detail_model.dart';
 
-abstract class CoinDetailService {
+import '/../src/models/coins_detail.dart';
+
+abstract class DetailService {
   final http.Client client;
 
-  CoinDetailService(this.client);
+  DetailService(this.client);
 
   Future<CoinDetail>? fetchCoinsDetailScreen();
 }

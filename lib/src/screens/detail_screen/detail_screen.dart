@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:intl/intl.dart' as intl;
+
 import '/../src/blocs/detail_screen_bloc/detail_bloc.dart';
 import '/../src/blocs/detail_screen_bloc/detail_state.dart';
+
 import '/../src/widgets/custom_card_detail.dart';
+
 import '/../src/constants/string_constants.dart';
 import '/../src/constants/color_constants.dart';
 
@@ -59,24 +63,26 @@ class DetailScreen extends StatelessWidget {
                       Expanded(
                         flex: 8,
                         child: CustomCardDetail(
-                          state.coinDetailScreen!.id,
-                          state.coinDetailScreen!.symbol,
-                          state.coinDetailScreen!.name,
-                          state.coinDetailScreen!.image,
-                          state.coinDetailScreen!.description,
-                          num.tryParse(percentageFormat.format(
+                          id: state.coinDetailScreen!.id,
+                          symbol: state.coinDetailScreen!.symbol,
+                          name: state.coinDetailScreen!.name,
+                          image: state.coinDetailScreen!.image,
+                          description: state.coinDetailScreen!.description,
+                          currentPrice: num.tryParse(percentageFormat.format(
                                   state.coinDetailScreen!.currentPrice)) ??
                               0,
-                          num.tryParse(percentageFormat.format(state
-                                  .coinDetailScreen!
-                                  .priceChangePercentage24H)) ??
+                          priceChangePercentage24H: num.tryParse(
+                                  percentageFormat.format(state
+                                      .coinDetailScreen!
+                                      .priceChangePercentage24H)) ??
                               0,
-                          state.coinDetailScreen!.high24H,
-                          state.coinDetailScreen!.low24H,
-                          state.coinDetailScreen!.marketCap,
-                          state.coinDetailScreen!.circulatingSupply,
-                          state.coinDetailScreen!.totalSupply,
-                          state.coinDetailScreen!.maxSupply,
+                          high24H: state.coinDetailScreen!.high24H,
+                          low24H: state.coinDetailScreen!.low24H,
+                          marketCap: state.coinDetailScreen!.marketCap,
+                          circulatingSupply:
+                              state.coinDetailScreen!.circulatingSupply,
+                          totalSupply: state.coinDetailScreen!.totalSupply,
+                          maxSupply: state.coinDetailScreen!.maxSupply,
                         ),
                       ),
                     ],
