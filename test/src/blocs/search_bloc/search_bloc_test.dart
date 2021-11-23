@@ -25,7 +25,12 @@ void main() {
   });
 
   blocTest('emits [] when no event is added',
-      build: () => SearchBloc(), expect: () => []);
+      build: () {
+        coinService = MockCoinService();
+
+        return SearchBloc(coinService: coinService);
+      },
+      expect: () => []);
 
   blocTest(
     'emits [SearchLoadSuccess] when [SearchRequested] is called',

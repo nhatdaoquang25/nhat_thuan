@@ -23,7 +23,12 @@ void main() {
     coinBloc?.close();
   });
   blocTest('emits [] when no event is added',
-      build: () => CoinBloc(), expect: () => []);
+      build: () {
+        coinService = MockCoinService();
+
+        return CoinBloc(coinService: coinService);
+      },
+      expect: () => []);
 
   blocTest(
     'emits [CoinLoadInProgress] then [CoinLoadSucess] when [CoinRequested] is called',

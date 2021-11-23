@@ -6,14 +6,14 @@ import '/../src/services/coin_service/coin_service.dart';
 import '../../models/coins.dart';
 
 class CoinBloc extends Bloc<CoinEvent, CoinState> {
-  final CoinService? coinService;
+  final CoinService coinService;
   List<Coins>? list = [];
 
-  CoinBloc({this.coinService}) : super(CoinInitial()) {
+  CoinBloc({required this.coinService}) : super(CoinInitial()) {
     on<CoinRequested>((event, emit) async {
       try {
         emit(CoinLoadInProgress());
-        list = await coinService!.fecthCoins(event.numberPage);
+        list = await coinService.fecthCoins(event.numberPage);
         emit(CoinLoadSucess(coins: list));
       } catch (e) {
         emit(CoinLoadFailure(errorMessage: e.toString()));
@@ -21,7 +21,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     });
     on<CoinLoadMore>((event, emit) async {
       try {
-        var coins = await coinService!.fecthCoins(event.numberPage);
+        var coins = await coinService.fecthCoins(event.numberPage);
         list!.addAll(coins!);
         emit(CoinLoadSucess(coins: list));
       } catch (e) {
