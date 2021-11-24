@@ -63,7 +63,7 @@ void main() {
     });
 
     testWidgets(
-        'Display AutoComplete widget when bloc state is [SearchLoadSucess]',
+        'Display AutoComplete widget when bloc state is [SearchLoadSuccess]',
         (tester) async {
       when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           listCoins: List<Coins>.from(
@@ -76,7 +76,7 @@ void main() {
     });
 
     testWidgets(
-        'Should render Category\'s data in TextField when bloc state is [SearchLoadSucess]',
+        'Should render textField when bloc state is [SearchLoadSuccess]',
         (tester) async {
       when(() => searchBloc.state)
           .thenReturn(SearchLoadSuccess(listCoins: listCoin));

@@ -34,6 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     controller = ScrollController()..addListener(_scrollListener);
+
+    BlocProvider.of<CoinBloc>(context)
+        .add(CoinRequested(numberPage: ValueConstants.defaultValue));
   }
 
   @override
@@ -44,8 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CoinBloc>(context)
-        .add(CoinRequested(numberPage: ValueConstants.defaultValue));
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
