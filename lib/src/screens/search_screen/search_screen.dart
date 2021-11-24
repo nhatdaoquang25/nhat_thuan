@@ -36,7 +36,7 @@ class SearchScreen extends StatelessWidget {
               size: 30,
               color: Colors.white,
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.maybePop(context),
           ),
         ),
         body: Container(

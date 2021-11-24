@@ -75,6 +75,21 @@ void main() {
 
       expect(titleFinder, findsOneWidget);
     });
+
+    testWidgets(
+        'Should render CircularProgressIndicator when coin bloc state is [CoinLoadInProgress]',
+        (tester) async {
+      when(() => coinService.fecthCoins(1))
+          .thenAnswer((_) async => mockResponse);
+      when(() => coinBloc.state).thenReturn(CoinLoadInProgress());
+
+      await tester.pumpWidget(widget);
+
+      final findCircularProgressIndicator =
+          find.byType(CircularProgressIndicator);
+
+      expect(findCircularProgressIndicator, findsOneWidget);
+    });
     testWidgets(
         'Should render red container with error message when coin bloc state is [CoinLoadFailure]',
         (tester) async {
@@ -114,7 +129,9 @@ void main() {
           coins: List<Coins>.from(
               mockResponse.map((model) => Coins.fromJson(model)))));
       await mockNetwork(() async {
-        await tester.pumpWidget(widget);
+        await tester.pumpWidget(const MaterialApp(
+          home: HomeScreen(),
+        ));
         await tester.tap(find.byType(IconButton));
         await tester.pumpAndSettle();
         expect(find.byType(SearchScreen), findsOneWidget);

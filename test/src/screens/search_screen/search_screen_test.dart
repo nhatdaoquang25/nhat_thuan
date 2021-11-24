@@ -11,6 +11,7 @@ import 'package:nhat_thuan/src/blocs/search_bloc/search_state.dart';
 import 'package:nhat_thuan/src/constants/name_routes_constants.dart';
 import 'package:nhat_thuan/src/models/coins.dart';
 import 'package:nhat_thuan/src/routes/route_genertor.dart';
+import 'package:nhat_thuan/src/screens/home_screen/home_screen.dart';
 import 'package:nhat_thuan/src/screens/search_screen/search_screen.dart';
 import 'package:nhat_thuan/src/services/coin_service/coin_service.dart';
 import 'package:nhat_thuan/src/widgets/custom_seach_bar.dart';
@@ -69,6 +70,25 @@ void main() {
           of: find.byType(AppBar), matching: find.text("SEARCH SCREEN"));
 
       expect(titleFinder, findsOneWidget);
+    });
+
+    testWidgets('Navigator pop to HomeScreen', (tester) async {
+      when(() => coinService.fecthCoins(1))
+          .thenAnswer((_) async => mockResponse);
+      when(() => searchBloc.state).thenReturn(SearchLoadInProgress());
+      await tester.pumpWidget(widget);
+
+      await tester.pumpAndSettle();
+
+      final iconButtonFinder = find.byType(IconButton);
+
+      expect(iconButtonFinder, findsOneWidget);
+
+      await tester.tap(iconButtonFinder);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(HomeScreen), findsNothing);
     });
     testWidgets(
         'Should render error message when coin bloc state is [SeachLoadFailure]',
