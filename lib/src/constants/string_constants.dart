@@ -14,4 +14,5 @@ class StringConstants {
   static const String high = 'High';
   static const String low = 'Low';
   static const String hintSearch = 'Enter your name';
+  static const String failException = 'Failed to load coin list';
 }

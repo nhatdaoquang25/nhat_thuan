@@ -25,6 +25,10 @@ class CustomCard extends StatelessWidget {
     double sizeWidth = MediaQuery.of(context).size.width;
     double sizeHeight = MediaQuery.of(context).size.height;
 
+    const double _widthSizedBox = 50;
+    const double _heightSizedBox = 50;
+    const double _paddingImage = 10.0;
+
     return Card(
       elevation: 2,
       shadowColor: Colors.white,
@@ -46,11 +50,14 @@ class CustomCard extends StatelessWidget {
               Expanded(
                   child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Image.network(
-                      imageNetwork,
-                      fit: BoxFit.contain,
+                  SizedBox(
+                    width: _widthSizedBox,
+                    height: _heightSizedBox,
+                    child: Padding(
+                      padding: const EdgeInsets.all(_paddingImage),
+                      child: Image.network(
+                        imageNetwork,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -60,21 +67,34 @@ class CustomCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            name,
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500),
+                          SizedBox(
+                            width: sizeWidth / 2.5,
+                            child: Text(
+                              name.toUpperCase(),
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 19, fontWeight: FontWeight.w600),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const Icon(
-                                Icons.arrow_drop_down_sharp,
-                                color: Colors.red,
-                              ),
+                              priceChange24h > 0
+                                  ? const Icon(
+                                      Icons.arrow_drop_up_sharp,
+                                      color: Colors.green,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_drop_down_sharp,
+                                      color: Colors.red,
+                                    ),
                               Text(
                                 '$priceChange24h ($priceChangePercentage24h%)',
-                                style: const TextStyle(fontSize: 16),
+                                style: priceChange24h > 0
+                                    ? const TextStyle(
+                                        fontSize: 16, color: Colors.green)
+                                    : const TextStyle(
+                                        fontSize: 16, color: Colors.red),
                               ),
                             ],
                           )
@@ -82,7 +102,7 @@ class CustomCard extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        '\$ $currentPrice',
+                        '\$$currentPrice',
                         style: const TextStyle(fontSize: 20),
                       )
                     ],

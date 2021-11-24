@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/../src/widgets/custom_card.dart';
+import '../../widgets/custom_seach_bar.dart';
+
+import '../../blocs/search_bloc/search_bloc.dart';
+import '../../blocs/search_bloc/search_event.dart';
+
+import '../../blocs/search_bloc/search_state.dart';
 
 import '/../src/constants/color_constants.dart';
 import '/../src/constants/string_constants.dart';
@@ -10,8 +16,12 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double sizeHight = MediaQuery.of(context).size.height;
-    double spacerTop = sizeHight / 10;
+    BlocProvider.of<SearchBloc>(context).add(SearchRequested());
+    double sizeHeight = MediaQuery.of(context).size.height;
+
+    double spacerTop = sizeHeight / 10;
+    double paddingAll = 10.0;
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -26,7 +36,7 @@ class SearchScreen extends StatelessWidget {
               size: 30,
               color: Colors.white,
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.maybePop(context),
           ),
         ),
         body: Container(
@@ -36,37 +46,24 @@ class SearchScreen extends StatelessWidget {
             children: [
               SizedBox(height: spacerTop),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      size: 25,
-                    ),
-                    hintText: StringConstants.hintSearch,
-                    hintStyle:
-                        const TextStyle(color: Colors.grey, fontSize: 16),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.grey)),
-                  ),
-                ),
-              ),
-              Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 5),
-                  child: CustomCard(
-                    index: 0,
-                    onTap: () {},
-                    name: "BTC",
-                    imageNetwork:
-                        "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png",
-                    currentPrice: 6500,
-                    priceChange24h: 12.2,
-                    priceChangePercentage24h: 0.4,
-                  ))
+                  padding: EdgeInsets.all(paddingAll),
+                  child: BlocBuilder<SearchBloc, SearchState>(
+                    builder: (context, state) {
+                      if (state is SeachLoadFailure) {
+                        return Center(
+                          child: Text(state.errorMessage!),
+                        );
+                      }
+                      if (state is SearchLoadSuccess) {
+                        return CustomSearchBar(
+                          coinslist: state.listCoins!,
+                        );
+                      }
+                      return Container(
+                        color: Colors.green,
+                      );
+                    },
+                  )),
             ],
           ),
         ));

@@ -1,0 +1,22 @@
+const String mockCoinsData = r'''[
+ {"id":"bitcoin",
+ "symbol":"btc",
+ "name":"Bitcoin",
+ "image":"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+ "current_price":61795,
+ "high_24h":66359,
+ "low_24h":62151,
+ "price_change_24h":4139.89781530574,
+ "price_change_percentage_24h":6.27872
+ },
+ {"id":"ethereum",
+ "symbol":"eth",
+ "name":"Ethereum",
+ "image":"https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+ "current_price":4353.49,
+ "high_24h":4770.73,
+ "low_24h":4382.9,
+ "price_change_24h":-337.179567609428,
+ "price_change_percentage_24h":-7.1883
+ } 
+]''';

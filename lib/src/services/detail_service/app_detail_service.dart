@@ -17,8 +17,8 @@ class AppDetailService extends DetailService {
   Future<CoinDetail> fetchCoinsDetailScreen() async {
     final uri = Uri(
       scheme: 'https',
-      host: AppConfig.instance.getValue(AppConstants.HOST_NAME),
-      path: AppConfig.instance.getValue(AppConstants.COINS_PATH) + "/bitcoin",
+      host: AppConfig.instance.getValue(AppConstants.hostName),
+      path: AppConfig.instance.getValue(AppConstants.coinPath) + "/bitcoin",
     );
 
     var response = await client.get(uri);

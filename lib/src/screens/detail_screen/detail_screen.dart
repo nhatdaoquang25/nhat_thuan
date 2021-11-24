@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '/../src/constants/string_constants.dart';
+import '/../src/constants/color_constants.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:intl/intl.dart' as intl;
@@ -9,9 +13,6 @@ import '/../src/blocs/detail_screen_bloc/detail_bloc.dart';
 import '/../src/blocs/detail_screen_bloc/detail_state.dart';
 
 import '/../src/widgets/custom_card_detail.dart';
-
-import '/../src/constants/string_constants.dart';
-import '/../src/constants/color_constants.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);

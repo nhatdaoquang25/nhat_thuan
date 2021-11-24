@@ -23,14 +23,14 @@ class AppConfig {
 
   Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
-    const env = String.fromEnvironment(AppConstants.ENV,
-        defaultValue: AppConstants.DEFAULT_ENV);
+    const env = String.fromEnvironment(AppConstants.env,
+        defaultValue: AppConstants.defaultEnv);
     await setValue(env);
   }
 
   setValue(String env) async {
     final configString = await rootBundle.loadString(
-        AppConstants.ENV_CONFIG_PATH + env + AppConstants.ENV_CONFIG_TYPE);
+        AppConstants.envConfigPath + env + AppConstants.envConfigType);
     _config = json.decode(configString);
   }
 }
