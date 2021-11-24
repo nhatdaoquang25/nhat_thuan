@@ -21,6 +21,7 @@ class DetailLoadInProgress extends DetailState {}
 
 class DetailLoadSuccess extends DetailState {
   final CoinDetail? coinDetailScreen;
+
   DetailLoadSuccess(this.coinDetailScreen);
 
   @override
