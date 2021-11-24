@@ -20,10 +20,10 @@ class DetailLoadFailure extends DetailState {
 class DetailLoadInProgress extends DetailState {}
 
 class DetailLoadSuccess extends DetailState {
-  final CoinDetail? coinDetailScreen;
+  final CoinDetail coinDetail;
 
-  DetailLoadSuccess(this.coinDetailScreen);
+  DetailLoadSuccess({required this.coinDetail});
 
   @override
-  List<Object?> get props => [coinDetailScreen];
+  List<Object?> get props => [coinDetail];
 }

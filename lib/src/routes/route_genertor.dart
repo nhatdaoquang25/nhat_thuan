@@ -11,9 +11,9 @@ class RouteGenerator {
     switch (settings.name) {
       case NameRoutesConstants.root:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-
       case NameRoutesConstants.detailScreen:
-        return MaterialPageRoute(builder: (_) => const DetailScreen());
+        var coins = settings.arguments as String;
+        return MaterialPageRoute(builder: (_) => DetailScreen(id: coins));
       case NameRoutesConstants.searchScreen:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       default:

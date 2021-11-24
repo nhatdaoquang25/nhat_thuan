@@ -126,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       index: index,
                                       onTap: () {
                                         Navigator.of(context).pushNamed(
-                                            NameRoutesConstants.detailScreen);
+                                            NameRoutesConstants.detailScreen,
+                                            arguments: coinIndex.id);
                                       },
                                       name: coinIndex.name,
                                       imageNetwork: coinIndex.image,

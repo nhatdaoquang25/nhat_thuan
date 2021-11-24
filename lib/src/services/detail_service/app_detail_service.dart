@@ -11,11 +11,11 @@ class AppDetailService extends DetailService {
   AppDetailService(http.Client client) : super(client);
 
   @override
-  Future<CoinDetail> fetchCoinsDetailScreen() async {
+  Future<CoinDetail> fetchCoinsDetailScreen(String id) async {
     final uri = Uri(
       scheme: 'https',
       host: AppConfig.instance.getValue(AppConstants.hostName),
-      path: AppConfig.instance.getValue(AppConstants.coinPath) + "/bitcoin",
+      path: AppConfig.instance.getValue(AppConstants.coinPath) + "/$id",
     );
 
     var response = await client.get(uri);
