@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '/../src/blocs/detail_screen_bloc/detail_event.dart';
-import '/../src/blocs/detail_screen_bloc/detail_bloc.dart';
-import '/../src/blocs/detail_screen_bloc/detail_state.dart';
+import '../../blocs/coin_detail_bloc/coin_detail_bloc.dart';
+import '../../blocs/coin_detail_bloc/coin_detail_event.dart';
+import '../../blocs/coin_detail_bloc/coin_detail_state.dart';
 import '/../src/widgets/custom_card_detail.dart';
 import '/../src/constants/string_constants.dart';
 import '/../src/constants/color_constants.dart';
@@ -17,7 +16,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DetailBloc>().add(DetailRequested(id: id));
+    context.read<CoinDetailBloc>().add(CoinDetailRequested(id: id));
     final percentageFormat = intl.NumberFormat("##0.0");
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -36,21 +35,21 @@ class DetailScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: BlocBuilder<DetailBloc, DetailState>(
+      body: BlocBuilder<CoinDetailBloc, CoinDetailState>(
         builder: (context, state) {
-          if (state is DetailLoadFailure) {
+          if (state is CoinDetailLoadFailure) {
             return Container(
               color: Colors.red,
               alignment: Alignment.center,
               child: Text(state.errorMessage!),
             );
           }
-          if (state is DetailLoadInProgress) {
+          if (state is CoinDetailLoadInProgress) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          if (state is DetailLoadSuccess) {
+          if (state is CoinDetailLoadSuccess) {
             return Container(
               decoration: const BoxDecoration(
                   gradient: ColorConstants.backgroundGradient),

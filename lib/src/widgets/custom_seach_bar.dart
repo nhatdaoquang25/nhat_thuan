@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/name_routes_constants.dart';
 import '../constants/string_constants.dart';
-
 import '../models/coins.dart';
 
 class CustomSearchBar extends StatelessWidget {

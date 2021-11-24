@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import '../../constants/string_constants.dart';
 
+import '../../constants/string_constants.dart';
 import '/../src/config/app_config.dart';
 import '/../src/config/constants.dart';
-
 import '/../src/models/coins.dart';
 import '/../src/services/coin_service/coin_service.dart';
 
