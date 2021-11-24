@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/../src/blocs/detail_screen_bloc/detail_event.dart';
 import '/../src/blocs/detail_screen_bloc/detail_state.dart';
-
 import '/../src/services/detail_service/detail_service.dart';
 
 class DetailBloc extends Bloc<DetailEvent, DetailState> {
