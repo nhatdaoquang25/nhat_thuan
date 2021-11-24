@@ -25,20 +25,10 @@ class App extends StatelessWidget {
             create: (context) =>
                 DetailBloc(service: AppDetailService(httpClient))),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: NameRoutesConstants.root,
         onGenerateRoute: RouteGenerator.generateRoute,
-        onUnknownRoute: (RouteSettings settings) {
-          return MaterialPageRoute<void>(
-            settings: settings,
-            builder: (BuildContext context) => const Scaffold(
-              body: Center(
-                child: Text(StringConstants.notFound),
-              ),
-            ),
-          );
-        },
       ),
     );
   }
