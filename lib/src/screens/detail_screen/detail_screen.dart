@@ -69,29 +69,29 @@ class DetailScreen extends StatelessWidget {
                         description: state.coinDetail.description,
                         currentPrice: num.tryParse(percentageFormat
                                 .format(state.coinDetail.currentPrice)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         priceChangePercentage24H: num.tryParse(
                                 percentageFormat.format(state
                                     .coinDetail.priceChangePercentage24H)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         high24H: num.tryParse(percentageFormat
                                 .format(state.coinDetail.high24H)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         low24H: num.tryParse(percentageFormat
                                 .format(state.coinDetail.low24H)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         marketCap: num.tryParse(percentageFormat
                                 .format(state.coinDetail.marketCap)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         circulatingSupply: num.tryParse(percentageFormat
                                 .format(state.coinDetail.circulatingSupply)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         totalSupply: num.tryParse(percentageFormat
                                 .format(state.coinDetail.totalSupply)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                         maxSupply: num.tryParse(percentageFormat
                                 .format(state.coinDetail.maxSupply)) ??
-                            0,
+                            num.parse(StringConstants.notApplicable),
                       ),
                     ),
                   ],
