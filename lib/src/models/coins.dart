@@ -1,15 +1,15 @@
 class Coins {
-  String id;
-  String symbol;
-  String name;
-  String image;
-  num currentPrice;
-  num high24H;
-  num low24H;
-  num priceChange24H;
-  num priceChangePercentage24H;
+  final String id;
+  final String symbol;
+  final String name;
+  final String image;
+  final num currentPrice;
+  final num high24H;
+  final num low24H;
+  final num priceChange24H;
+  final num priceChangePercentage24H;
 
-  Coins({
+  const Coins({
     required this.id,
     required this.symbol,
     required this.name,
