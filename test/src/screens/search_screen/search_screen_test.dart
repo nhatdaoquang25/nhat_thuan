@@ -1,12 +1,9 @@
 import 'dart:convert';
 
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:nhat_thuan/src/blocs/search_bloc/search_bloc.dart';
-import 'package:nhat_thuan/src/blocs/search_bloc/search_event.dart';
 import 'package:nhat_thuan/src/blocs/search_bloc/search_state.dart';
 import 'package:nhat_thuan/src/constants/name_routes_constants.dart';
 import 'package:nhat_thuan/src/models/coins.dart';
@@ -17,20 +14,10 @@ import 'package:nhat_thuan/src/services/coin_service/coin_service.dart';
 import 'package:nhat_thuan/src/widgets/custom_seach_bar.dart';
 
 import '../../mock/coins_mock_data.dart';
+import '../../mock/mock_fake_class.dart';
+import 'package:mocktail/mocktail.dart';
+
 import '../../mock/mock_network.dart';
-
-class MockSearchBloc extends MockBloc<SearchEvent, SearchState>
-    implements SearchBloc {}
-
-class MockSearchService extends Mock implements CoinService {}
-
-class FakeSearchState extends Fake implements SearchState {}
-
-class FakeSearchEvent extends Fake implements SearchEvent {}
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
-
-class FakeRoute extends Fake implements Route {}
 
 void main() {
   final mockResponse = json.decode(mockCoinsData);
@@ -60,8 +47,6 @@ void main() {
     );
 
     testWidgets('Should render Appbar with correct title', (tester) async {
-      when(() => coinService.fecthCoins(1))
-          .thenAnswer((_) async => mockResponse);
       when(() => searchBloc.state).thenReturn(SearchLoadInProgress());
 
       await tester.pumpWidget(widget);
@@ -73,8 +58,6 @@ void main() {
     });
 
     testWidgets('Navigator pop to HomeScreen', (tester) async {
-      when(() => coinService.fecthCoins(1))
-          .thenAnswer((_) async => mockResponse);
       when(() => searchBloc.state).thenReturn(SearchLoadInProgress());
       await tester.pumpWidget(widget);
 
