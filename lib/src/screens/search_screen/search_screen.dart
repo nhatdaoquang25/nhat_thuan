@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widgets/custom_seach_bar.dart';
-
 import '../../blocs/search_bloc/search_bloc.dart';
 import '../../blocs/search_bloc/search_event.dart';
-
 import '../../blocs/search_bloc/search_state.dart';
-
 import '/../src/constants/color_constants.dart';
 import '/../src/constants/string_constants.dart';
 

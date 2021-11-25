@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/name_routes_constants.dart';
 import '../constants/string_constants.dart';
-
 import '../models/coins.dart';
 
 class CustomSearchBar extends StatelessWidget {
@@ -82,8 +81,9 @@ class CustomSearchBar extends StatelessWidget {
                     return InkWell(
                       onTap: () {
                         onSelected(option);
-                        Navigator.of(context)
-                            .pushNamed(NameRoutesConstants.detailScreen);
+                        Navigator.of(context).pushNamed(
+                            NameRoutesConstants.detailScreen,
+                            arguments: option.id);
                       },
                       child: ListTile(
                         leading: SizedBox(

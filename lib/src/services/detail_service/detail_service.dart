@@ -7,5 +7,5 @@ abstract class DetailService {
 
   DetailService(this.client);
 
-  Future<CoinDetail>? fetchCoinsDetailScreen();
+  Future<CoinDetail>? fetchCoinsDetailScreen(String id);
 }

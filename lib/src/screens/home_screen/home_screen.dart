@@ -5,7 +5,6 @@ import 'package:intl/intl.dart' as intl;
 import '/../src/blocs/coin_bloc/coin_bloc.dart';
 import '/../src/blocs/coin_bloc/coin_event.dart';
 import '/../src/blocs/coin_bloc/coin_state.dart';
-
 import '/../src/constants/color_constants.dart';
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/constants/string_constants.dart';
@@ -126,7 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       index: index,
                                       onTap: () {
                                         Navigator.of(context).pushNamed(
-                                            NameRoutesConstants.detailScreen);
+                                            NameRoutesConstants.detailScreen,
+                                            arguments: coinIndex.id);
                                       },
                                       name: coinIndex.name,
                                       imageNetwork: coinIndex.image,

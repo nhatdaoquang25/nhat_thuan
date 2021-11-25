@@ -1,99 +1,107 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '/../src/blocs/detail_screen_bloc/detail_event.dart';
-import '/../src/blocs/detail_screen_bloc/detail_bloc.dart';
-import '/../src/blocs/detail_screen_bloc/detail_state.dart';
+import '../../blocs/coin_detail_bloc/coin_detail_bloc.dart';
+import '../../blocs/coin_detail_bloc/coin_detail_event.dart';
+import '../../blocs/coin_detail_bloc/coin_detail_state.dart';
 import '/../src/widgets/custom_card_detail.dart';
 import '/../src/constants/string_constants.dart';
 import '/../src/constants/color_constants.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final String id;
+
+  const DetailScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    context.read<DetailBloc>().add(DetailRequested());
+    context.read<CoinDetailBloc>().add(CoinDetailRequested(id: id));
     final percentageFormat = intl.NumberFormat("##0.0");
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          title: const Text(StringConstants.titleDetailScreen,
-              style: TextStyle(color: Colors.white, fontSize: 25)),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              size: 30,
-              color: Colors.white,
-            ),
-            onPressed: () => Navigator.pop(context),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: const Text(StringConstants.titleDetailScreen,
+            style: TextStyle(color: Colors.white, fontSize: 25)),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            size: 30,
+            color: Colors.white,
           ),
+          onPressed: () => Navigator.pop(context),
         ),
-        body: BlocBuilder<DetailBloc, DetailState>(
-          builder: (context, state) {
-            if (state is DetailLoadFailure) {
-              return Container(
-                color: Colors.red,
-                alignment: Alignment.center,
-                child: Text(state.errorMessage!),
-              );
-            }
-            if (state is DetailLoadInProgress) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is DetailLoadSuccess) {
-              return Container(
-                decoration: const BoxDecoration(
-                    gradient: ColorConstants.backgroundGradient),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Column(
-                    children: [
-                      Expanded(child: Container()),
-                      Expanded(
-                        flex: 8,
-                        child: CustomCardDetail(
-                          id: state.coinDetailScreen!.id,
-                          symbol: state.coinDetailScreen!.symbol,
-                          name: state.coinDetailScreen!.name,
-                          image: state.coinDetailScreen!.image,
-                          description: state.coinDetailScreen!.description,
-                          currentPrice: num.tryParse(percentageFormat.format(
-                                  state.coinDetailScreen!.currentPrice)) ??
-                              0,
-                          priceChangePercentage24H: num.tryParse(
-                                  percentageFormat.format(state
-                                      .coinDetailScreen!
-                                      .priceChangePercentage24H)) ??
-                              0,
-                          high24H: state.coinDetailScreen!.high24H,
-                          low24H: state.coinDetailScreen!.low24H,
-                          marketCap: state.coinDetailScreen!.marketCap,
-                          circulatingSupply:
-                              state.coinDetailScreen!.circulatingSupply,
-                          totalSupply: state.coinDetailScreen!.totalSupply,
-                          maxSupply: state.coinDetailScreen!.maxSupply,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }
+      ),
+      body: BlocBuilder<CoinDetailBloc, CoinDetailState>(
+        builder: (context, state) {
+          if (state is CoinDetailLoadFailure) {
             return Container(
-              color: Colors.orange,
+              color: Colors.red,
+              alignment: Alignment.center,
+              child: Text(state.errorMessage!),
             );
-          },
-        ),
+          }
+          if (state is CoinDetailLoadInProgress) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is CoinDetailLoadSuccess) {
+            return Container(
+              decoration: const BoxDecoration(
+                  gradient: ColorConstants.backgroundGradient),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Column(
+                  children: [
+                    Expanded(child: Container()),
+                    Expanded(
+                      flex: 8,
+                      child: CustomCardDetail(
+                        id: state.coinDetail.id,
+                        symbol: state.coinDetail.symbol,
+                        name: state.coinDetail.name,
+                        image: state.coinDetail.image,
+                        description: state.coinDetail.description,
+                        currentPrice: num.tryParse(percentageFormat
+                                .format(state.coinDetail.currentPrice)) ??
+                            num.parse(StringConstants.notApplicable),
+                        priceChangePercentage24H: num.tryParse(
+                                percentageFormat.format(state
+                                    .coinDetail.priceChangePercentage24H)) ??
+                            num.parse(StringConstants.notApplicable),
+                        high24H: num.tryParse(percentageFormat
+                                .format(state.coinDetail.high24H)) ??
+                            num.parse(StringConstants.notApplicable),
+                        low24H: num.tryParse(percentageFormat
+                                .format(state.coinDetail.low24H)) ??
+                            num.parse(StringConstants.notApplicable),
+                        marketCap: num.tryParse(percentageFormat
+                                .format(state.coinDetail.marketCap)) ??
+                            num.parse(StringConstants.notApplicable),
+                        circulatingSupply: num.tryParse(percentageFormat
+                                .format(state.coinDetail.circulatingSupply)) ??
+                            num.parse(StringConstants.notApplicable),
+                        totalSupply: num.tryParse(percentageFormat
+                                .format(state.coinDetail.totalSupply)) ??
+                            num.parse(StringConstants.notApplicable),
+                        maxSupply: num.tryParse(percentageFormat
+                                .format(state.coinDetail.maxSupply)) ??
+                            num.parse(StringConstants.notApplicable),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return Container(
+            color: Colors.orange,
+          );
+        },
       ),
     );
   }
