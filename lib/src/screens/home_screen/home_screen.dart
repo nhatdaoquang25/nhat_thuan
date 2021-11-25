@@ -9,7 +9,6 @@ import '/../src/constants/color_constants.dart';
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/constants/string_constants.dart';
 import '/../src/widgets/custom_card.dart';
-import '../../constants/value_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -34,8 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     controller = ScrollController()..addListener(_scrollListener);
 
-    BlocProvider.of<CoinBloc>(context)
-        .add(CoinRequested(numberPage: ValueConstants.defaultValue));
+    BlocProvider.of<CoinBloc>(context).add(CoinRequested());
   }
 
   @override
@@ -81,17 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
             return Container(
               color: Colors.red,
               alignment: Alignment.center,
-              child: Text(state.errorMessage!),
+              child: Text(state.errorMessage),
             );
           }
           if (state is CoinLoadSucess) {
             return RefreshIndicator(
               onRefresh: () async {
-                BlocProvider.of<CoinBloc>(context).add(
-                    CoinRequested(numberPage: ValueConstants.defaultValue));
-                setState(() {
-                  index = 1;
-                });
+                BlocProvider.of<CoinBloc>(context).add(CoinRequested());
               },
               child: Container(
                   decoration: const BoxDecoration(
@@ -113,9 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 controller: controller,
                                 padding:
                                     EdgeInsets.only(top: _paddingTopOfListView),
-                                itemCount: state.coins!.length,
+                                itemCount: state.coins.length,
                                 itemBuilder: (context, index) {
-                                  var coinIndex = state.coins![index];
+                                  var coinIndex = state.coins[index];
                                   return Padding(
                                     padding: EdgeInsets.only(
                                         left: _paddingLeftOfCustomCard,
@@ -171,10 +165,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final maxScroll = controller.position.maxScrollExtent;
     final currentScroll = controller.offset;
     if (currentScroll == maxScroll) {
+      BlocProvider.of<CoinBloc>(context).add(CoinLoadMore());
+
       setState(() {
         isLoading = true;
-        BlocProvider.of<CoinBloc>(context)
-            .add(CoinLoadMore(numberPage: ++index));
       });
     }
   }

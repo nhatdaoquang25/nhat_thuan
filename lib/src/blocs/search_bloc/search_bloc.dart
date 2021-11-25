@@ -13,7 +13,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchRequested>((event, emit) async {
       try {
         var listCoins = await coinService.fecthCoinsAll();
-        emit(SearchLoadSuccess(listCoins: listCoins));
+        emit(SearchLoadSuccess(listCoins: listCoins!));
       } catch (e) {
         emit(SeachLoadFailure(errorMessage: e.toString()));
       }

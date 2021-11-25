@@ -14,6 +14,5 @@ class AppConstants {
   static const String currencyOfMarket = 'usd';
   static const String orderBy = 'market_cap_desc';
   static const String amountPerPage = '20';
-  static const String numberPage = '1';
   static const String isSparkline = 'false';
 }
