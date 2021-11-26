@@ -177,13 +177,22 @@ void main() {
     });
 
     testWidgets('triggers refresh on pull to refresh', (tester) async {
+      when(() => coinService.fecthCoins(1)).thenAnswer((_) async =>
+          List<Coins>.from(mockResponse.map((model) => Coins.fromJson(model))));
       when(() => coinBloc.state).thenAnswer((_) => CoinLoadSucess(
           coins: List<Coins>.from(
               mockResponse.map((model) => Coins.fromJson(model)))));
+
       await mockNetwork(() async {
         await tester.pumpWidget(widget);
-        await tester.drag(find.byType(ListView), const Offset(0, 1500));
+
+        final categoryCardFinder = find.descendant(
+            of: find.byType(ListView), matching: find.byType(CustomCard).first);
+        await tester.fling(
+            categoryCardFinder, const Offset(0.0, 100.0), 1000.0);
+
         await tester.pumpAndSettle();
+
         verify(() => coinBloc.add(CoinRequested())).called(1);
       });
     });
