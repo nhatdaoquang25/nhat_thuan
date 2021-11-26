@@ -21,9 +21,9 @@ class CoinDetailLoadFailure extends CoinDetailState {
 class CoinDetailLoadInProgress extends CoinDetailState {}
 
 class CoinDetailLoadSuccess extends CoinDetailState {
-  final CoinDetail coinDetail;
+  final CoinDetail? coinDetail;
 
-  CoinDetailLoadSuccess({required this.coinDetail});
+  CoinDetailLoadSuccess({this.coinDetail});
 
   @override
   List<Object?> get props => [coinDetail];

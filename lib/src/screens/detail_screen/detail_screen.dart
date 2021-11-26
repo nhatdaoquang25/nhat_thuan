@@ -16,7 +16,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CoinDetailBloc>().add(CoinDetailRequested(id: id));
+    BlocProvider.of<CoinDetailBloc>(context).add(CoinDetailRequested(id: id));
     final percentageFormat = intl.NumberFormat("##0.0");
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -32,7 +32,7 @@ class DetailScreen extends StatelessWidget {
             size: 30,
             color: Colors.white,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.maybePop(context),
         ),
       ),
       body: BlocBuilder<CoinDetailBloc, CoinDetailState>(
@@ -61,35 +61,35 @@ class DetailScreen extends StatelessWidget {
                     Expanded(
                       flex: 8,
                       child: CustomCardDetail(
-                        id: state.coinDetail.id,
-                        symbol: state.coinDetail.symbol,
-                        name: state.coinDetail.name,
-                        image: state.coinDetail.image,
-                        description: state.coinDetail.description,
+                        id: state.coinDetail!.id,
+                        symbol: state.coinDetail!.symbol,
+                        name: state.coinDetail!.name,
+                        image: state.coinDetail!.image,
+                        description: state.coinDetail!.description,
                         currentPrice: num.tryParse(percentageFormat
-                                .format(state.coinDetail.currentPrice)) ??
+                                .format(state.coinDetail!.currentPrice)) ??
                             num.parse(StringConstants.notApplicable),
                         priceChangePercentage24H: num.tryParse(
                                 percentageFormat.format(state
-                                    .coinDetail.priceChangePercentage24H)) ??
+                                    .coinDetail!.priceChangePercentage24H)) ??
                             num.parse(StringConstants.notApplicable),
                         high24H: num.tryParse(percentageFormat
-                                .format(state.coinDetail.high24H)) ??
+                                .format(state.coinDetail!.high24H)) ??
                             num.parse(StringConstants.notApplicable),
                         low24H: num.tryParse(percentageFormat
-                                .format(state.coinDetail.low24H)) ??
+                                .format(state.coinDetail!.low24H)) ??
                             num.parse(StringConstants.notApplicable),
                         marketCap: num.tryParse(percentageFormat
-                                .format(state.coinDetail.marketCap)) ??
+                                .format(state.coinDetail!.marketCap)) ??
                             num.parse(StringConstants.notApplicable),
                         circulatingSupply: num.tryParse(percentageFormat
-                                .format(state.coinDetail.circulatingSupply)) ??
+                                .format(state.coinDetail!.circulatingSupply)) ??
                             num.parse(StringConstants.notApplicable),
                         totalSupply: num.tryParse(percentageFormat
-                                .format(state.coinDetail.totalSupply)) ??
+                                .format(state.coinDetail!.totalSupply)) ??
                             num.parse(StringConstants.notApplicable),
                         maxSupply: num.tryParse(percentageFormat
-                                .format(state.coinDetail.maxSupply)) ??
+                                .format(state.coinDetail!.maxSupply)) ??
                             num.parse(StringConstants.notApplicable),
                       ),
                     ),
