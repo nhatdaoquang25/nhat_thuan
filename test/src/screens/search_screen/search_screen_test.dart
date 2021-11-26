@@ -71,7 +71,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(HomeScreen), findsNothing);
+      verify(() => mockObserver.didPush(any(), any()));
     });
     testWidgets(
         'Should render error message when coin bloc state is [SeachLoadFailure]',

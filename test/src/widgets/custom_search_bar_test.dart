@@ -41,19 +41,6 @@ void main() {
     late CoinDetailBloc coinDetailBloc;
     late CoinBloc coinBloc;
 
-    var widget = MaterialApp(
-      initialRoute: NameRoutesConstants.root,
-      onGenerateRoute: RouteGenerator.generateRoute,
-      home: MultiBlocProvider(providers: [
-        BlocProvider(
-          create: (context) => searchBloc,
-        ),
-        BlocProvider(
-          create: (context) => coinDetailBloc,
-        ),
-      ], child: const SearchScreen()),
-      navigatorObservers: [mockObserver],
-    );
     setUp(() {
       coinService = MockSearchService();
       searchBloc = MockSearchBloc();

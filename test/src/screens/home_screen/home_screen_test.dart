@@ -177,15 +177,11 @@ void main() {
     });
 
     testWidgets('triggers refresh on pull to refresh', (tester) async {
-      when(() => coinBloc.state).thenReturn(CoinLoadSucess(
-          coins: List<Coins>.from(
-              mockResponse.map((model) => Coins.fromJson(model)))));
       when(() => coinBloc.state).thenAnswer((_) => CoinLoadSucess(
           coins: List<Coins>.from(
               mockResponse.map((model) => Coins.fromJson(model)))));
       await mockNetwork(() async {
         await tester.pumpWidget(widget);
-
         await tester.drag(find.byType(ListView), const Offset(0, 1500));
         await tester.pumpAndSettle();
         verify(() => coinBloc.add(CoinRequested())).called(1);
