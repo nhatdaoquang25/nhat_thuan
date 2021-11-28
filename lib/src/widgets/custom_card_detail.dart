@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' as intl;
 
 import '/../src/constants/color_constants.dart';
 import '/../src/constants/string_constants.dart';
@@ -37,6 +38,7 @@ class CustomCardDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberFormat = intl.NumberFormat("##0.0");
     double coinFontSize = 25.0;
     double currentPriceFontSize = 22.0;
     double screenTextFontSize = 16.0;
@@ -45,6 +47,7 @@ class CustomCardDetail extends StatelessWidget {
     double widthImage = 36.0;
     double heightImage = 36.0;
     FontWeight screenTextFontWeight = FontWeight.w500;
+
     return Card(
       child: Padding(
         padding: EdgeInsets.all(screenPadding),
@@ -85,7 +88,9 @@ class CustomCardDetail extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    '\$$currentPrice',
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(currentPrice))
+                            .toString(),
                     style: TextStyle(
                         fontSize: currentPriceFontSize,
                         fontWeight: screenTextFontWeight),
@@ -96,7 +101,12 @@ class CustomCardDetail extends StatelessWidget {
                           size: currentPriceFontSize, color: Colors.green)
                       : Icon(Icons.arrow_drop_down_outlined,
                           size: currentPriceFontSize, color: Colors.red),
-                  Text('($priceChangePercentage24H%)',
+                  Text(
+                      '(' +
+                          num.tryParse(
+                                  numberFormat.format(priceChangePercentage24H))
+                              .toString() +
+                          '%)',
                       style: priceChangePercentage24H > 0
                           ? TextStyle(
                               fontSize: currentPriceFontSize,
@@ -116,7 +126,9 @@ class CustomCardDetail extends StatelessWidget {
                         fontSize: screenTextFontSize,
                         color: Colors.green,
                         fontWeight: screenTextFontWeight)),
-                Text('\$ $high24H',
+                Text(
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(high24H)).toString(),
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         color: Colors.green,
@@ -131,7 +143,9 @@ class CustomCardDetail extends StatelessWidget {
                         fontSize: screenTextFontSize,
                         color: Colors.red,
                         fontWeight: screenTextFontWeight)),
-                Text('\$ $low24H',
+                Text(
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(low24H)).toString(),
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         color: Colors.red,
@@ -146,7 +160,9 @@ class CustomCardDetail extends StatelessWidget {
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
-                Text('\$ $marketCap',
+                Text(
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(marketCap)).toString(),
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
@@ -159,7 +175,10 @@ class CustomCardDetail extends StatelessWidget {
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
-                Text('\$ $circulatingSupply',
+                Text(
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(circulatingSupply))
+                            .toString(),
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
@@ -172,7 +191,10 @@ class CustomCardDetail extends StatelessWidget {
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
-                Text('\$ $totalSupply',
+                Text(
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(totalSupply))
+                            .toString(),
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
@@ -185,7 +207,9 @@ class CustomCardDetail extends StatelessWidget {
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
-                Text('\$ $maxSupply',
+                Text(
+                    '\$ ' +
+                        num.tryParse(numberFormat.format(maxSupply)).toString(),
                     style: TextStyle(
                         fontSize: screenTextFontSize,
                         fontWeight: screenTextFontWeight)),
@@ -200,7 +224,8 @@ class CustomCardDetail extends StatelessWidget {
                   Text(
                     StringConstants.textDescription,
                     style: TextStyle(
-                        fontSize: 22.0, fontWeight: screenTextFontWeight),
+                        fontSize: currentPriceFontSize,
+                        fontWeight: screenTextFontWeight),
                   ),
                   SizedBox(
                     height: widthSizeBox,

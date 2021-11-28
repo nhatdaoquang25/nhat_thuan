@@ -22,8 +22,8 @@ void main() {
         low24H: 55915,
         marketCap: 1069521687196,
         circulatingSupply: 18881681,
-        totalSupply: 21000000.0,
-        maxSupply: 21000000,
+        totalSupply: 21000000,
+        maxSupply: 22000000,
       ),
     ),
   );

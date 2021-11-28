@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:nhat_thuan/src/models/coins_detail.dart';
 
 void main() {
