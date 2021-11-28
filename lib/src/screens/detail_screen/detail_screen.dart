@@ -16,10 +16,10 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CoinDetailBloc>(context).add(CoinDetailRequested(id: id));
+    final percentageFormat = intl.NumberFormat("##0.0");
     double _titleFontSize = 25.0;
     double _iconBackSize = 30.0;
     double _padding = 5.0;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

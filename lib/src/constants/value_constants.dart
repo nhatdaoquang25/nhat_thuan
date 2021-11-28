@@ -1,3 +1,3 @@
 class ValueConstants {
-  static int defaultValue = 0;
+  static int defaultValue = 1;
 }

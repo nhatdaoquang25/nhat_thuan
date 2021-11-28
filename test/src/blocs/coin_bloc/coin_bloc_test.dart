@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:nhat_thuan/src/blocs/coin_bloc/coin_bloc.dart';
 import 'package:nhat_thuan/src/blocs/coin_bloc/coin_event.dart';
 import 'package:nhat_thuan/src/blocs/coin_bloc/coin_state.dart';
+
 import 'package:nhat_thuan/src/services/coin_service/coin_service.dart';
 import 'package:mockito/mockito.dart';
 
@@ -34,10 +35,11 @@ void main() {
     'emits [CoinLoadInProgress] then [CoinLoadSucess] when [CoinRequested] is called',
     build: () {
       coinService = MockCoinService();
+      when(coinService.fecthCoins(1)).thenAnswer((_) async => []);
       return CoinBloc(coinService: coinService);
     },
-    act: (CoinBloc bloc) => bloc.add(CoinRequested(numberPage: 1)),
-    expect: () => [CoinLoadInProgress(), CoinLoadSucess()],
+    act: (CoinBloc bloc) => bloc.add(CoinRequested()),
+    expect: () => [CoinLoadInProgress(), CoinLoadSucess(coins: const [])],
   );
 
   blocTest(
@@ -47,7 +49,7 @@ void main() {
       when(coinService.fecthCoins(1)).thenThrow(Exception());
       return CoinBloc(coinService: coinService);
     },
-    act: (CoinBloc bloc) => bloc.add(CoinRequested(numberPage: 1)),
+    act: (CoinBloc bloc) => bloc.add(CoinRequested()),
     expect: () => [
       CoinLoadInProgress(),
       CoinLoadFailure(errorMessage: Exception().toString()),
@@ -55,23 +57,24 @@ void main() {
   );
 
   blocTest(
-    'emits [CoinLoadInProgress] then [CoinLoadSucess] when [CoinRequested] is called',
+    'emits [CoinLoadSucess] when [CoinRequested] is called',
     build: () {
       coinService = MockCoinService();
+      when(coinService.fecthCoins(1)).thenAnswer((_) async => []);
       return CoinBloc(coinService: coinService);
     },
-    act: (CoinBloc bloc) => bloc.add(CoinLoadMore(numberPage: 1)),
-    expect: () => [CoinLoadSucess()],
+    act: (CoinBloc bloc) => bloc.add(CoinLoadMore()),
+    expect: () => [CoinLoadSucess(coins: const [])],
   );
 
   blocTest(
-    'emits [CoinLoadFailure] when [CoinRequested] is called and service throws error.',
+    'emits [CoinLoadFailure] when [CoinLoadMore] is called and service throws error.',
     build: () {
       coinService = MockCoinService();
       when(coinService.fecthCoins(1)).thenThrow(Exception());
       return CoinBloc(coinService: coinService);
     },
-    act: (CoinBloc bloc) => bloc.add(CoinLoadMore(numberPage: 1)),
+    act: (CoinBloc bloc) => bloc.add(CoinLoadMore()),
     expect: () => [
       CoinLoadFailure(errorMessage: Exception().toString()),
     ],

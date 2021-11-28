@@ -9,7 +9,6 @@ import '/../src/constants/color_constants.dart';
 import '/../src/constants/name_routes_constants.dart';
 import '/../src/constants/string_constants.dart';
 import '/../src/widgets/custom_card.dart';
-import '../../constants/value_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,15 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final double _paddingBottomtOfCustomCard = 5;
   ScrollController controller = ScrollController();
   int index = 1;
-  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     controller = ScrollController()..addListener(_scrollListener);
-
-    BlocProvider.of<CoinBloc>(context)
-        .add(CoinRequested(numberPage: ValueConstants.defaultValue));
+    BlocProvider.of<CoinBloc>(context).add(CoinRequested());
   }
 
   @override
@@ -70,30 +66,26 @@ class _HomeScreenState extends State<HomeScreen> {
               ))
         ],
       ),
-      body: BlocBuilder<CoinBloc, CoinState>(
-        builder: (context, state) {
-          if (state is CoinLoadInProgress) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is CoinLoadFailure) {
-            return Container(
-              color: Colors.red,
-              alignment: Alignment.center,
-              child: Text(state.errorMessage!),
-            );
-          }
-          if (state is CoinLoadSucess) {
-            return RefreshIndicator(
-              onRefresh: () async {
-                BlocProvider.of<CoinBloc>(context).add(
-                    CoinRequested(numberPage: ValueConstants.defaultValue));
-                setState(() {
-                  index = 1;
-                });
-              },
-              child: Container(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          BlocProvider.of<CoinBloc>(context).add(CoinRequested());
+        },
+        child: BlocBuilder<CoinBloc, CoinState>(
+          builder: (context, state) {
+            if (state is CoinLoadInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is CoinLoadFailure) {
+              return Container(
+                color: Colors.red,
+                alignment: Alignment.center,
+                child: Text(state.errorMessage),
+              );
+            }
+            if (state is CoinLoadSucess) {
+              return Container(
                   decoration: const BoxDecoration(
                       gradient: ColorConstants.backgroundGradient),
                   child: Column(
@@ -104,77 +96,57 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Expanded(
                         flex: 9,
-                        child: Column(
-                          children: [
-                            Flexible(
-                              flex: 6,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                controller: controller,
-                                padding:
-                                    EdgeInsets.only(top: _paddingTopOfListView),
-                                itemCount: state.coins!.length,
-                                itemBuilder: (context, index) {
-                                  var coinIndex = state.coins![index];
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                        left: _paddingLeftOfCustomCard,
-                                        right: _paddingRightOfCustomCard,
-                                        bottom: _paddingBottomtOfCustomCard),
-                                    child: CustomCard(
-                                      index: index,
-                                      onTap: () {
-                                        Navigator.of(context).pushNamed(
-                                            NameRoutesConstants.detailScreen,
-                                            arguments: coinIndex.id);
-                                      },
-                                      name: coinIndex.name,
-                                      imageNetwork: coinIndex.image,
-                                      currentPrice: coinIndex.currentPrice,
-                                      priceChange24h: num.tryParse(
-                                              percentageFormat.format(
-                                                  coinIndex.priceChange24H)) ??
-                                          0,
-                                      priceChangePercentage24h: num.tryParse(
-                                              percentageFormat.format(coinIndex
-                                                  .priceChangePercentage24H)) ??
-                                          0,
-                                    ),
-                                  );
+                        child: ListView.builder(
+                          controller: controller,
+                          padding: EdgeInsets.only(top: _paddingTopOfListView),
+                          itemCount: state.coins.length,
+                          itemBuilder: (context, index) {
+                            var coinIndex = state.coins[index];
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                  left: _paddingLeftOfCustomCard,
+                                  right: _paddingRightOfCustomCard,
+                                  bottom: _paddingBottomtOfCustomCard),
+                              child: CustomCard(
+                                index: index,
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      NameRoutesConstants.detailScreen,
+                                      arguments: coinIndex.id);
                                 },
+                                name: coinIndex.name,
+                                imageNetwork: coinIndex.image,
+                                currentPrice: coinIndex.currentPrice,
+                                priceChange24h: num.tryParse(percentageFormat
+                                        .format(coinIndex.priceChange24H)) ??
+                                    0,
+                                priceChangePercentage24h: num.tryParse(
+                                        percentageFormat.format(coinIndex
+                                            .priceChangePercentage24H)) ??
+                                    0,
                               ),
-                            ),
-                            isLoading
-                                ? const Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : Container()
-                          ],
+                            );
+                          },
                         ),
                       )
                     ],
-                  )),
+                  ));
+            }
+            return Container(
+              color: Colors.green,
             );
-          }
-          return Container(
-            color: Colors.green,
-          );
-        },
+          },
+        ),
       ),
     );
   }
 
   void _scrollListener() {
-    setState(() {
-      isLoading = false;
-    });
     final maxScroll = controller.position.maxScrollExtent;
     final currentScroll = controller.offset;
     if (currentScroll == maxScroll) {
       setState(() {
-        isLoading = true;
-        BlocProvider.of<CoinBloc>(context)
-            .add(CoinLoadMore(numberPage: ++index));
+        BlocProvider.of<CoinBloc>(context).add(CoinLoadMore());
       });
     }
   }

@@ -5,18 +5,6 @@ abstract class CoinEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class CoinRequested extends CoinEvent {
-  final int numberPage;
+class CoinRequested extends CoinEvent {}
 
-  CoinRequested({required this.numberPage});
-  @override
-  List<Object?> get props => [numberPage];
-}
-
-class CoinLoadMore extends CoinEvent {
-  final int numberPage;
-
-  CoinLoadMore({required this.numberPage});
-  @override
-  List<Object?> get props => [numberPage];
-}
+class CoinLoadMore extends CoinEvent {}
