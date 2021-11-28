@@ -16,9 +16,9 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CoinDetailBloc>(context).add(CoinDetailRequested(id: id));
-    double titleFontSize = 25.0;
-    double iconBackSize = 30.0;
-    double padding = 5.0;
+    double _titleFontSize = 25.0;
+    double _iconBackSize = 30.0;
+    double _padding = 5.0;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -27,11 +27,11 @@ class DetailScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(StringConstants.titleDetailScreen,
-            style: TextStyle(color: Colors.white, fontSize: titleFontSize)),
+            style: TextStyle(color: Colors.white, fontSize: _titleFontSize)),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            size: iconBackSize,
+            size: _iconBackSize,
             color: Colors.white,
           ),
           onPressed: () => Navigator.maybePop(context),
@@ -56,27 +56,27 @@ class DetailScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                   gradient: ColorConstants.backgroundGradient),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: padding),
+                padding: EdgeInsets.symmetric(horizontal: _padding),
                 child: Column(
                   children: [
                     Expanded(child: Container()),
                     Expanded(
                       flex: 8,
                       child: CustomCardDetail(
-                        id: state.coinDetail!.id,
-                        symbol: state.coinDetail!.symbol,
-                        name: state.coinDetail!.name,
-                        image: state.coinDetail!.image,
-                        description: state.coinDetail!.description,
-                        currentPrice: state.coinDetail!.currentPrice,
+                        id: state.coinDetail.id,
+                        symbol: state.coinDetail.symbol,
+                        name: state.coinDetail.name,
+                        image: state.coinDetail.image,
+                        description: state.coinDetail.description,
+                        currentPrice: state.coinDetail.currentPrice,
                         priceChangePercentage24H:
-                            state.coinDetail!.priceChangePercentage24H,
-                        high24H: state.coinDetail!.high24H,
-                        low24H: state.coinDetail!.low24H,
-                        marketCap: state.coinDetail!.marketCap,
-                        circulatingSupply: state.coinDetail!.circulatingSupply,
-                        totalSupply: state.coinDetail!.totalSupply,
-                        maxSupply: state.coinDetail!.maxSupply,
+                            state.coinDetail.priceChangePercentage24H,
+                        high24H: state.coinDetail.high24H,
+                        low24H: state.coinDetail.low24H,
+                        marketCap: state.coinDetail.marketCap,
+                        circulatingSupply: state.coinDetail.circulatingSupply,
+                        totalSupply: state.coinDetail.totalSupply,
+                        maxSupply: state.coinDetail.maxSupply,
                       ),
                     ),
                   ],

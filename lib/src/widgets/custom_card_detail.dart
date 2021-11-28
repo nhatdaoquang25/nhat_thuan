@@ -39,18 +39,18 @@ class CustomCardDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final numberFormat = intl.NumberFormat("##0.0");
-    double coinFontSize = 25.0;
-    double currentPriceFontSize = 22.0;
-    double screenTextFontSize = 16.0;
-    double screenPadding = 10.0;
-    double widthSizeBox = 10.0;
-    double widthImage = 36.0;
-    double heightImage = 36.0;
-    FontWeight screenTextFontWeight = FontWeight.w500;
+    double _coinFontSize = 25.0;
+    double _currentPriceFontSize = 22.0;
+    double _screenTextFontSize = 16.0;
+    double _screenPadding = 10.0;
+    double _widthSizeBox = 10.0;
+    double _widthImage = 36.0;
+    double _heightImage = 36.0;
+    FontWeight _screenTextFontWeight = FontWeight.w500;
 
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(screenPadding),
+        padding: EdgeInsets.all(_screenPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,9 +58,9 @@ class CustomCardDetail extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: widthImage,
-                  width: heightImage,
-                  margin: EdgeInsets.only(right: screenPadding),
+                  height: _widthImage,
+                  width: _heightImage,
+                  margin: EdgeInsets.only(right: _screenPadding),
                   child: Image.network(
                     image,
                     fit: BoxFit.fill,
@@ -69,21 +69,23 @@ class CustomCardDetail extends StatelessWidget {
                 Text(
                   name.toUpperCase(),
                   style: TextStyle(
-                      fontSize: coinFontSize, fontWeight: screenTextFontWeight),
+                      fontSize: _coinFontSize,
+                      fontWeight: _screenTextFontWeight),
                 ),
                 SizedBox(
-                  width: widthSizeBox,
+                  width: _widthSizeBox,
                 ),
                 Text(
                   '($symbol)'.toUpperCase(),
                   style: TextStyle(
-                      fontSize: coinFontSize, fontWeight: screenTextFontWeight),
+                      fontSize: _coinFontSize,
+                      fontWeight: _screenTextFontWeight),
                 ),
               ],
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: screenPadding,
+                top: _screenPadding,
               ),
               child: Row(
                 children: [
@@ -92,15 +94,15 @@ class CustomCardDetail extends StatelessWidget {
                         num.tryParse(numberFormat.format(currentPrice))
                             .toString(),
                     style: TextStyle(
-                        fontSize: currentPriceFontSize,
-                        fontWeight: screenTextFontWeight),
+                        fontSize: _currentPriceFontSize,
+                        fontWeight: _screenTextFontWeight),
                   ),
-                  SizedBox(width: widthSizeBox),
+                  SizedBox(width: _widthSizeBox),
                   priceChangePercentage24H > 0
                       ? Icon(Icons.arrow_drop_up_outlined,
-                          size: currentPriceFontSize, color: Colors.green)
+                          size: _currentPriceFontSize, color: Colors.green)
                       : Icon(Icons.arrow_drop_down_outlined,
-                          size: currentPriceFontSize, color: Colors.red),
+                          size: _currentPriceFontSize, color: Colors.red),
                   Text(
                       '(' +
                           num.tryParse(
@@ -109,10 +111,10 @@ class CustomCardDetail extends StatelessWidget {
                           '%)',
                       style: priceChangePercentage24H > 0
                           ? TextStyle(
-                              fontSize: currentPriceFontSize,
+                              fontSize: _currentPriceFontSize,
                               color: Colors.green)
                           : TextStyle(
-                              fontSize: currentPriceFontSize,
+                              fontSize: _currentPriceFontSize,
                               color: Colors.red)),
                 ],
               ),
@@ -123,16 +125,16 @@ class CustomCardDetail extends StatelessWidget {
               children: [
                 Text(StringConstants.textHigh,
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
+                        fontSize: _screenTextFontSize,
                         color: Colors.green,
-                        fontWeight: screenTextFontWeight)),
+                        fontWeight: _screenTextFontWeight)),
                 Text(
                     '\$ ' +
                         num.tryParse(numberFormat.format(high24H)).toString(),
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
+                        fontSize: _screenTextFontSize,
                         color: Colors.green,
-                        fontWeight: screenTextFontWeight)),
+                        fontWeight: _screenTextFontWeight)),
               ],
             ),
             Row(
@@ -140,16 +142,16 @@ class CustomCardDetail extends StatelessWidget {
               children: [
                 Text(StringConstants.textLow,
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
+                        fontSize: _screenTextFontSize,
                         color: Colors.red,
-                        fontWeight: screenTextFontWeight)),
+                        fontWeight: _screenTextFontWeight)),
                 Text(
                     '\$ ' +
                         num.tryParse(numberFormat.format(low24H)).toString(),
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
+                        fontSize: _screenTextFontSize,
                         color: Colors.red,
-                        fontWeight: screenTextFontWeight)),
+                        fontWeight: _screenTextFontWeight)),
               ],
             ),
             const CustomLine(),
@@ -158,14 +160,14 @@ class CustomCardDetail extends StatelessWidget {
               children: [
                 Text(StringConstants.textMarketCap,
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
                 Text(
                     '\$ ' +
                         num.tryParse(numberFormat.format(marketCap)).toString(),
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
               ],
             ),
             Row(
@@ -173,15 +175,15 @@ class CustomCardDetail extends StatelessWidget {
               children: [
                 Text(StringConstants.textCirculationSuplly,
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
                 Text(
                     '\$ ' +
                         num.tryParse(numberFormat.format(circulatingSupply))
                             .toString(),
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
               ],
             ),
             Row(
@@ -189,15 +191,15 @@ class CustomCardDetail extends StatelessWidget {
               children: [
                 Text(StringConstants.textTotal,
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
                 Text(
                     '\$ ' +
                         num.tryParse(numberFormat.format(totalSupply))
                             .toString(),
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
               ],
             ),
             Row(
@@ -205,14 +207,14 @@ class CustomCardDetail extends StatelessWidget {
               children: [
                 Text(StringConstants.textMax,
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
                 Text(
                     '\$ ' +
                         num.tryParse(numberFormat.format(maxSupply)).toString(),
                     style: TextStyle(
-                        fontSize: screenTextFontSize,
-                        fontWeight: screenTextFontWeight)),
+                        fontSize: _screenTextFontSize,
+                        fontWeight: _screenTextFontWeight)),
               ],
             ),
             const CustomLine(),
@@ -224,18 +226,18 @@ class CustomCardDetail extends StatelessWidget {
                   Text(
                     StringConstants.textDescription,
                     style: TextStyle(
-                        fontSize: currentPriceFontSize,
-                        fontWeight: screenTextFontWeight),
+                        fontSize: _currentPriceFontSize,
+                        fontWeight: _screenTextFontWeight),
                   ),
                   SizedBox(
-                    height: widthSizeBox,
+                    height: _widthSizeBox,
                   ),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Text(
                         description,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: screenTextFontSize),
+                        style: TextStyle(fontSize: _screenTextFontSize),
                       ),
                     ),
                   ),
