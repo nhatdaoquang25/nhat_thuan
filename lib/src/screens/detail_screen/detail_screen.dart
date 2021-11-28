@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart' as intl;
 
 import '../../blocs/coin_detail_bloc/coin_detail_bloc.dart';
 import '../../blocs/coin_detail_bloc/coin_detail_event.dart';
@@ -18,21 +17,24 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<CoinDetailBloc>(context).add(CoinDetailRequested(id: id));
     final percentageFormat = intl.NumberFormat("##0.0");
+    double _titleFontSize = 25.0;
+    double _iconBackSize = 30.0;
+    double _padding = 5.0;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: const Text(StringConstants.titleDetailScreen,
-            style: TextStyle(color: Colors.white, fontSize: 25)),
+        title: Text(StringConstants.titleDetailScreen,
+            style: TextStyle(color: Colors.white, fontSize: _titleFontSize)),
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            size: 30,
+            size: _iconBackSize,
             color: Colors.white,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.maybePop(context),
         ),
       ),
       body: BlocBuilder<CoinDetailBloc, CoinDetailState>(
@@ -54,7 +56,7 @@ class DetailScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                   gradient: ColorConstants.backgroundGradient),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                padding: EdgeInsets.symmetric(horizontal: _padding),
                 child: Column(
                   children: [
                     Expanded(child: Container()),
@@ -66,31 +68,15 @@ class DetailScreen extends StatelessWidget {
                         name: state.coinDetail.name,
                         image: state.coinDetail.image,
                         description: state.coinDetail.description,
-                        currentPrice: num.tryParse(percentageFormat
-                                .format(state.coinDetail.currentPrice)) ??
-                            num.parse(StringConstants.notApplicable),
-                        priceChangePercentage24H: num.tryParse(
-                                percentageFormat.format(state
-                                    .coinDetail.priceChangePercentage24H)) ??
-                            num.parse(StringConstants.notApplicable),
-                        high24H: num.tryParse(percentageFormat
-                                .format(state.coinDetail.high24H)) ??
-                            num.parse(StringConstants.notApplicable),
-                        low24H: num.tryParse(percentageFormat
-                                .format(state.coinDetail.low24H)) ??
-                            num.parse(StringConstants.notApplicable),
-                        marketCap: num.tryParse(percentageFormat
-                                .format(state.coinDetail.marketCap)) ??
-                            num.parse(StringConstants.notApplicable),
-                        circulatingSupply: num.tryParse(percentageFormat
-                                .format(state.coinDetail.circulatingSupply)) ??
-                            num.parse(StringConstants.notApplicable),
-                        totalSupply: num.tryParse(percentageFormat
-                                .format(state.coinDetail.totalSupply)) ??
-                            num.parse(StringConstants.notApplicable),
-                        maxSupply: num.tryParse(percentageFormat
-                                .format(state.coinDetail.maxSupply)) ??
-                            num.parse(StringConstants.notApplicable),
+                        currentPrice: state.coinDetail.currentPrice,
+                        priceChangePercentage24H:
+                            state.coinDetail.priceChangePercentage24H,
+                        high24H: state.coinDetail.high24H,
+                        low24H: state.coinDetail.low24H,
+                        marketCap: state.coinDetail.marketCap,
+                        circulatingSupply: state.coinDetail.circulatingSupply,
+                        totalSupply: state.coinDetail.totalSupply,
+                        maxSupply: state.coinDetail.maxSupply,
                       ),
                     ),
                   ],

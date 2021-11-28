@@ -1,19 +1,19 @@
 class CoinDetail {
-  String id;
-  String symbol;
-  String name;
-  String image;
-  String description;
-  num currentPrice;
-  num priceChangePercentage24H;
-  num high24H;
-  num low24H;
-  num marketCap;
-  num circulatingSupply;
-  num totalSupply;
-  num maxSupply;
+  final String id;
+  final String symbol;
+  final String name;
+  final String image;
+  final String description;
+  final num currentPrice;
+  final num priceChangePercentage24H;
+  final num high24H;
+  final num low24H;
+  final num marketCap;
+  final num circulatingSupply;
+  final num totalSupply;
+  final num maxSupply;
 
-  CoinDetail({
+  const CoinDetail({
     required this.id,
     required this.symbol,
     required this.name,
