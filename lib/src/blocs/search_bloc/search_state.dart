@@ -12,9 +12,9 @@ abstract class SearchState extends Equatable {
 class SearchLoadInProgress extends SearchState {}
 
 class SearchLoadSuccess extends SearchState {
-  final List<Coins>? listCoins;
+  final List<Coins> listCoins;
 
-  const SearchLoadSuccess({this.listCoins});
+  const SearchLoadSuccess({required this.listCoins});
   @override
   List<Object?> get props => [listCoins];
 }

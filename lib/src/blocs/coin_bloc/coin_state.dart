@@ -10,9 +10,9 @@ abstract class CoinState extends Equatable {
 class CoinInitial extends CoinState {}
 
 class CoinLoadFailure extends CoinState {
-  final String? errorMessage;
+  final String errorMessage;
 
-  CoinLoadFailure({this.errorMessage});
+  CoinLoadFailure({required this.errorMessage});
   @override
   List<Object?> get props => [errorMessage];
 }
@@ -20,9 +20,9 @@ class CoinLoadFailure extends CoinState {
 class CoinLoadInProgress extends CoinState {}
 
 class CoinLoadSucess extends CoinState {
-  final List<Coins>? coins;
+  final List<Coins> coins;
 
-  CoinLoadSucess({this.coins});
+  CoinLoadSucess({required this.coins});
 
   @override
   List<Object?> get props => [coins];

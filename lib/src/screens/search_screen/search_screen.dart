@@ -53,7 +53,7 @@ class SearchScreen extends StatelessWidget {
                       }
                       if (state is SearchLoadSuccess) {
                         return CustomSearchBar(
-                          coinslist: state.listCoins!,
+                          coinslist: state.listCoins,
                         );
                       }
                       return Container(

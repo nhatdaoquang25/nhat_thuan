@@ -36,10 +36,12 @@ void main() {
     'emits [SearchLoadSuccess] when [SearchRequested] is called',
     build: () {
       coinService = MockCoinService();
+      when(coinService.fecthCoinsAll()).thenAnswer((_) async => []);
+
       return SearchBloc(coinService: coinService);
     },
     act: (SearchBloc bloc) => bloc.add(SearchRequested()),
-    expect: () => [const SearchLoadSuccess()],
+    expect: () => [const SearchLoadSuccess(listCoins: [])],
   );
   blocTest(
     'emits [SeachLoadFailure] when [SearchRequested] is called and service throws error.',

@@ -72,7 +72,7 @@ class CustomSearchBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRaidus),
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: maxHeight),
-                child: ListView.separated(
+                child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   itemCount: options.length,
@@ -101,9 +101,6 @@ class CustomSearchBar extends StatelessWidget {
                         ),
                       ),
                     );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider();
                   },
                 ),
               ),
