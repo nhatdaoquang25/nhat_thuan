@@ -8,7 +8,6 @@ import 'package:nhat_thuan/src/blocs/search_bloc/search_state.dart';
 import 'package:nhat_thuan/src/constants/name_routes_constants.dart';
 import 'package:nhat_thuan/src/models/coins.dart';
 import 'package:nhat_thuan/src/routes/route_genertor.dart';
-import 'package:nhat_thuan/src/screens/home_screen/home_screen.dart';
 import 'package:nhat_thuan/src/screens/search_screen/search_screen.dart';
 import 'package:nhat_thuan/src/services/coin_service/coin_service.dart';
 import 'package:nhat_thuan/src/widgets/custom_seach_bar.dart';

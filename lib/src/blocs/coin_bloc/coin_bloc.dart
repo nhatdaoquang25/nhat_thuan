@@ -8,15 +8,15 @@ import '../../models/coins.dart';
 
 class CoinBloc extends Bloc<CoinEvent, CoinState> {
   final CoinService coinService;
-  late List<Coins> _list = [];
+  List<Coins> _listCoins = [];
   int numberPage = ValueConstants.defaultValue;
   CoinBloc({required this.coinService}) : super(CoinInitial()) {
     on<CoinRequested>((event, emit) async {
       try {
         emit(CoinLoadInProgress());
         numberPage = ValueConstants.defaultValue;
-        _list = await coinService.fecthCoins(numberPage)!;
-        emit(CoinLoadSucess(coins: _list));
+        _listCoins = await coinService.fecthCoins(numberPage)!;
+        emit(CoinLoadSucess(coins: _listCoins));
         numberPage++;
       } catch (e) {
         emit(CoinLoadFailure(errorMessage: e.toString()));
@@ -25,8 +25,8 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     on<CoinLoadMore>((event, emit) async {
       try {
         var coins = await coinService.fecthCoins(numberPage);
-        _list.addAll(coins!);
-        emit(CoinLoadSucess(coins: _list));
+        _listCoins.addAll(coins!);
+        emit(CoinLoadSucess(coins: _listCoins));
         numberPage++;
       } catch (e) {
         emit(CoinLoadFailure(errorMessage: e.toString()));

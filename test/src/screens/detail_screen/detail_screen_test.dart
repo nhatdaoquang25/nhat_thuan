@@ -76,7 +76,7 @@ void main() {
       onGenerateRoute: RouteGenerator.generateRoute,
       home: MultiBlocProvider(
           providers: [BlocProvider(create: (context) => coinDetailBloc)],
-          child: const DetailScreen(id: 'bitcoin')),
+          child: const DetailScreen(idCoin: 'bitcoin')),
       navigatorObservers: [mockObserver],
     );
 

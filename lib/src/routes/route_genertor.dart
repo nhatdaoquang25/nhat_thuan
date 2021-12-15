@@ -12,8 +12,8 @@ class RouteGenerator {
       case NameRoutesConstants.root:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case NameRoutesConstants.detailScreen:
-        var coins = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => DetailScreen(id: coins));
+        var idCoin = settings.arguments as String;
+        return MaterialPageRoute(builder: (_) => DetailScreen(idCoin: idCoin));
       case NameRoutesConstants.searchScreen:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       default:

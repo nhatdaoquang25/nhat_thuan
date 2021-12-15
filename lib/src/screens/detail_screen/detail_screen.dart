@@ -9,14 +9,14 @@ import '/../src/constants/string_constants.dart';
 import '/../src/constants/color_constants.dart';
 
 class DetailScreen extends StatelessWidget {
-  final String id;
+  final String idCoin;
 
-  const DetailScreen({Key? key, required this.id}) : super(key: key);
+  const DetailScreen({Key? key, required this.idCoin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CoinDetailBloc>(context).add(CoinDetailRequested(id: id));
-    final percentageFormat = intl.NumberFormat("##0.0");
+    BlocProvider.of<CoinDetailBloc>(context)
+        .add(CoinDetailRequested(id: idCoin));
     double _titleFontSize = 25.0;
     double _iconBackSize = 30.0;
     double _padding = 5.0;
